@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 require 'rubygems'
 require 'rake'
 
@@ -5,10 +7,11 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "alexa"
-    gem.summary = %Q{TODO}
-    gem.email = "wojtek@synergypeople.net"
+    gem.summary = %Q{Library to manage Alexa Web Information Service}
+    gem.email = "w.wnetrzak@gmail.com"
     gem.homepage = "http://github.com/morgoth/alexa"
     gem.authors = ["Wojciech Wnętrzak"]
+    gem.add_dependency('xml-simple')
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
 

@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<aws:UrlInfoResponse xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/"><aws:Response xmlns:aws="http://awis.amazonaws.com/doc/2005-07-11"><aws:OperationRequest><aws:RequestId>ed513f30-0ba1-4e32-b3a2-59e167a41dd0</aws:RequestId></aws:OperationRequest><aws:UrlInfoResult><aws:Alexa>
+  
+  <aws:ContactInfo>
+    <aws:DataUrl type="canonical">polsl.pl/</aws:DataUrl>
+    <aws:PhoneNumbers>
+      <aws:PhoneNumber/>
+    </aws:PhoneNumbers>
+    <aws:OwnerName/>
+    <aws:Email/>
+    <aws:PhysicalAddress/>
+    <aws:CompanyStockTicker/>
+  </aws:ContactInfo>
+  <aws:ContentData>
+    <aws:DataUrl type="canonical">polsl.pl/</aws:DataUrl>
+    <aws:SiteData>
+      <aws:Title>Silesian University of Technology</aws:Title>
+      <aws:Description>About the university, studies, faculties and departments, photo gallery.</aws:Description>
+    </aws:SiteData>
+    <aws:Speed>
+      <aws:MedianLoadTime>266</aws:MedianLoadTime>
+      <aws:Percentile>98</aws:Percentile>
+    </aws:Speed>
+    <aws:AdultContent>no</aws:AdultContent>
+    <aws:Language>
+      <aws:Locale>pl-PL</aws:Locale>
+      <aws:Encoding>iso-8859-2</aws:Encoding>
+    </aws:Language>
+    <aws:LinksInCount>281</aws:LinksInCount>
+    <aws:Keywords>
+      <aws:Keyword>Polska</aws:Keyword>
+      <aws:Keyword>Regionalne</aws:Keyword>
+      <aws:Keyword>Gliwice</aws:Keyword>
+    </aws:Keywords>
+    <aws:OwnedDomains/>
+  </aws:ContentData>
+  <aws:Related>
+    <aws:DataUrl type="canonical">polsl.pl/</aws:DataUrl>
+    <aws:RelatedLinks>
+      <aws:RelatedLink>
+        <aws:DataUrl type="canonical">www.us.edu.pl/</aws:DataUrl>
+        <aws:NavigableUrl>http://www.us.edu.pl/</aws:NavigableUrl>
+        <aws:Title>Silesian University</aws:Title>
+      </aws:RelatedLink>
+      <aws:RelatedLink>
+        <aws:DataUrl type="canonical">www.um.gliwice.pl/</aws:DataUrl>
+        <aws:NavigableUrl>http://www.um.gliwice.pl/</aws:NavigableUrl>
+        <aws:Title>Gliwice, Urząd Miasta</aws:Title>
+      </aws:RelatedLink>
+      <aws:RelatedLink>
+        <aws:DataUrl type="canonical">www.pw.edu.pl/</aws:DataUrl>
+        <aws:NavigableUrl>http://www.pw.edu.pl/</aws:NavigableUrl>
+        <aws:Title>Warsaw University of Technology</aws:Title>
+      </aws:RelatedLink>
+      <aws:RelatedLink>
+        <aws:DataUrl type="canonical">www.put.poznan.pl/</aws:DataUrl>
+        <aws:NavigableUrl>http://www.put.poznan.pl/</aws:NavigableUrl>
+        <aws:Title>Poznan University of Technology</aws:Title>
+      </aws:RelatedLink>
+      <aws:RelatedLink>
+        <aws:DataUrl type="canonical">www.agh.edu.pl/</aws:DataUrl>
+        <aws:NavigableUrl>http://www.agh.edu.pl/</aws:NavigableUrl>
+        <aws:Title>AGH University of Science and Technology</aws:Title>
+      </aws:RelatedLink>
+      <aws:RelatedLink>
+        <aws:DataUrl type="canonical">kbm.mt.polsl.gliwice.pl/</aws:DataUrl>
+        <aws:NavigableUrl>http://kbm.mt.polsl.gliwice.pl/</aws:NavigableUrl>
+        <aws:Title>Katedra Budowy Maszyn, Politechnika Śląska w Gliwicach</aws:Title>
+      </aws:RelatedLink>
+      <aws:RelatedLink>
+        <aws:DataUrl type="canonical">ck.polsl.pl/</aws:DataUrl>
+        <aws:NavigableUrl>http://ck.polsl.pl/</aws:NavigableUrl>
+        <aws:Title>Widok Listy</aws:Title>
+      </aws:RelatedLink>
+      <aws:RelatedLink>
+        <aws:DataUrl type="canonical">www1.plus.pl/</aws:DataUrl>
+        <aws:NavigableUrl>http://www1.plus.pl/</aws:NavigableUrl>
+        <aws:Title>Plus</aws:Title>
+      </aws:RelatedLink>
+      <aws:RelatedLink>
+        <aws:DataUrl type="canonical">www.zumi.pl/</aws:DataUrl>
+        <aws:NavigableUrl>http://www.zumi.pl/</aws:NavigableUrl>
+        <aws:Title>Zumi.pl Lokalizator internetowy</aws:Title>
+      </aws:RelatedLink>
+      <aws:RelatedLink>
+        <aws:DataUrl type="canonical">www.zgora.pl/</aws:DataUrl>
+        <aws:NavigableUrl>http://www.zgora.pl/</aws:NavigableUrl>
+        <aws:Title>Zielonogórski Informator Gospodarczy</aws:Title>
+      </aws:RelatedLink>
+    </aws:RelatedLinks>
+  </aws:Related>
+  <aws:TrafficData>
+    <aws:DataUrl type="canonical">polsl.pl/</aws:DataUrl>
+    <aws:Rank>86049</aws:Rank>
+  </aws:TrafficData>
+</aws:Alexa></aws:UrlInfoResult><aws:ResponseStatus xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/"><aws:StatusCode>Success</aws:StatusCode></aws:ResponseStatus></aws:Response></aws:UrlInfoResponse>
