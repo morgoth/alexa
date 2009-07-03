@@ -1,5 +1,4 @@
 # encoding: UTF-8
-
 require 'rubygems'
 require 'rake'
 
@@ -7,7 +6,7 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "alexa"
-    gem.summary = %Q{Library to manage Alexa Web Information Service}
+    gem.summary = %Q{Alexa Web Information Service library}
     gem.email = "w.wnetrzak@gmail.com"
     gem.homepage = "http://github.com/morgoth/alexa"
     gem.authors = ["Wojciech Wnętrzak"]
