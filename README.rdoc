@@ -1,6 +1,15 @@
-= alexa
+= Alexa Web Information Service
 
-Description goes here.
+== Usage
+  Alexa.url_info(:access_key_id => 'key', :secret_access_key => 'secret', :host => 'site.com')
+  # also you can specify option :response_group => 'Rank,ContactInfo' or any other valid group,
+  # see: http://docs.amazonwebservices.com/AlexaWebInfoService/2005-07-11/
+  # default response group takes all the available options
+
+  returns object with methods:
+  :xml_response, :rank, :data_url, :site_title, :site_description, :language_locale, :language_encoding,
+  :links_in_count, :keywords, :related_links, :speed_median_load_time, :speed_percentile,
+  :rank_by_country, :rank_by_city, :usage_statistics
 
 == Copyright
 
