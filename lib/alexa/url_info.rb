@@ -7,9 +7,9 @@ module Alexa
       :rank_by_country, :rank_by_city, :usage_statistics
 
     def initialize(options = {} )
-      @access_key_id = options[:access_key_id]
-      @secret_access_key = options[:secret_access_key]
-      @host = options[:host]
+      @access_key_id = options[:access_key_id] or raise ArgumentError.new("you must specify acces_key_id")
+      @secret_access_key = options[:secret_access_key] or raise ArgumentError.new("you must specify secret_acces_key")
+      @host = options[:host] or raise ArgumentError.new("you must specify host")
       @response_group = options[:response_group] || RESPONSE_GROUP
     end
 
@@ -23,20 +23,24 @@ module Alexa
 
     def parse_xml(xml)
       xml = XmlSimple.xml_in(xml.force_encoding(Encoding::UTF_8), 'ForceArray' => false)
-      @rank = xml['Response']['UrlInfoResult']['Alexa']['TrafficData']['Rank'].to_i
-      @data_url = xml['Response']['UrlInfoResult']['Alexa']['TrafficData']['DataUrl']['content']
-      @site_title = xml['Response']['UrlInfoResult']['Alexa']['ContentData']['SiteData']['Title']
-      @site_description = xml['Response']['UrlInfoResult']['Alexa']['ContentData']['SiteData']['Description']
-      @language_locale = xml['Response']['UrlInfoResult']['Alexa']['ContentData']['Language']['Locale']
-      @language_encoding = xml['Response']['UrlInfoResult']['Alexa']['ContentData']['Language']['Encoding']
-      @links_in_count = xml['Response']['UrlInfoResult']['Alexa']['ContentData']['LinksInCount'].to_i
-      @keywords = xml['Response']['UrlInfoResult']['Alexa']['ContentData']['Keywords']['Keyword']
-      @related_links = xml['Response']['UrlInfoResult']['Alexa']['Related']['RelatedLinks']['RelatedLink']
-      @speed_median_load_time = xml['Response']['UrlInfoResult']['Alexa']['ContentData']['Speed']['MedianLoadTime'].to_i
-      @speed_percentile = xml['Response']['UrlInfoResult']['Alexa']['ContentData']['Speed']['Percentile'].to_i
-      @rank_by_country = xml['Response']['UrlInfoResult']['Alexa']['TrafficData']['RankByCountry']['Country']
-      @rank_by_city = xml['Response']['UrlInfoResult']['Alexa']['TrafficData']['RankByCity']['City']
-      @usage_statistics = xml['Response']['UrlInfoResult']['Alexa']['TrafficData']['UsageStatistics']["UsageStatistic"]
+      group = response_group.split(',')
+      alexa = xml['Response']['UrlInfoResult']['Alexa']
+      @rank = alexa['TrafficData']['Rank'].to_i if group.include?('Rank')
+      @data_url = alexa['TrafficData']['DataUrl']['content'] if group.include?('Rank')
+      @rank_by_country = alexa['TrafficData']['RankByCountry']['Country'] if group.include?('RankByCountry')
+      @rank_by_city = alexa['TrafficData']['RankByCity']['City'] if group.include?('RankByCity')
+      @usage_statistics = alexa['TrafficData']['UsageStatistics']["UsageStatistic"]if group.include?('UsageStats')
+
+      @site_title = alexa['ContentData']['SiteData']['Title'] if group.include?('SiteData')
+      @site_description = alexa['ContentData']['SiteData']['Description'] if group.include?('SiteData')
+      @language_locale = alexa['ContentData']['Language']['Locale'] if group.include?('Language')
+      @language_encoding = alexa['ContentData']['Language']['Encoding'] if group.include?('Language')
+      @links_in_count = alexa['ContentData']['LinksInCount'].to_i if group.include?('LinksInCount')
+      @keywords = alexa['ContentData']['Keywords']['Keyword'] if group.include?('Keywords')
+      @speed_median_load_time = alexa['ContentData']['Speed']['MedianLoadTime'].to_i if group.include?('Speed')
+      @speed_percentile = alexa['ContentData']['Speed']['Percentile'].to_i if group.include?('Speed')
+
+      @related_links = alexa['Related']['RelatedLinks']['RelatedLink'] if group.include?('RelatedLinks')
     end
 
     private
