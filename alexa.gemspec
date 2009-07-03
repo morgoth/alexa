@@ -19,7 +19,9 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
+     "alexa.gemspec",
      "lib/alexa.rb",
+     "lib/alexa/url_info.rb",
      "test/alexa_test.rb",
      "test/fixtures/polsl.xml",
      "test/test_helper.rb"
