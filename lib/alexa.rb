@@ -8,7 +8,7 @@ require "net/https"
 require "xmlsimple"
 require "time"
 
-require 'url_info.rb'
+require 'alexa/url_info'
 
 module Alexa
   def self.url_info(options = {})
