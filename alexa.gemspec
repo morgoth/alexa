@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.4}
-  s.summary = %q{Library to manage Alexa Web Information Service}
+  s.summary = %q{Alexa Web Information Service library}
   s.test_files = [
     "test/alexa_test.rb",
      "test/test_helper.rb"
