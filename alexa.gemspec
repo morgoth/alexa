@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{alexa}
-  s.version = "0.0.1"
+  s.version = "0.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Wojciech Wnętrzak"]
@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
      "lib/alexa/url_info.rb",
      "test/alexa_test.rb",
      "test/fixtures/polsl.xml",
+     "test/fixtures/polsl_small.xml",
      "test/test_helper.rb"
   ]
   s.homepage = %q{http://github.com/morgoth/alexa}
