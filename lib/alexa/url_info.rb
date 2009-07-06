@@ -7,8 +7,8 @@ module Alexa
       :rank_by_country, :rank_by_city, :usage_statistics
 
     def initialize(options = {} )
-      @access_key_id = options[:access_key_id] or raise ArgumentError.new("you must specify acces_key_id")
-      @secret_access_key = options[:secret_access_key] or raise ArgumentError.new("you must specify secret_acces_key")
+      @access_key_id = options[:access_key_id] or raise ArgumentError.new("you must specify access_key_id")
+      @secret_access_key = options[:secret_access_key] or raise ArgumentError.new("you must specify secret_access_key")
       @host = options[:host] or raise ArgumentError.new("you must specify host")
       @response_group = options[:response_group] || RESPONSE_GROUP
     end
@@ -18,7 +18,10 @@ module Alexa
       timestamp = ( Time::now ).utc.strftime("%Y-%m-%dT%H:%M:%S.000Z")
       signature = generate_signature(secret_access_key, action, timestamp)
       url = generate_url(action, access_key_id, signature, timestamp, response_group, host)
-      @xml_response = Net::HTTP.get(url)
+      response = Net::HTTP.start(url.host) do |http|
+        http.get url.request_uri
+      end
+      @xml_response = handle_response(response).body
     end
 
     def parse_xml(xml)
@@ -44,6 +47,24 @@ module Alexa
     end
 
     private
+
+    def handle_response(response)
+      case response.code.to_i
+      when 200...300
+        response
+      when 300...600
+        if response.body.nil?
+          raise StandardError.new(response)
+        else
+          @xml_response = response.body
+          xml = XmlSimple.xml_in(response.body, 'ForceArray' => false)
+          message = xml['Errors']['Error']['Message']
+          raise StandardError.new(message)
+        end
+      else
+        raise StandardError.new("Unknown code: #{respnse.code}")
+      end
+    end
 
     def generate_signature(secret_acces_key, action, timestamp)
       Base64.encode64( OpenSSL::HMAC.digest( OpenSSL::Digest::Digest.new( "sha1" ), secret_access_key, action + timestamp)).strip

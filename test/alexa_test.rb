@@ -123,6 +123,12 @@ class AlexaTest < Test::Unit::TestCase
       end
 
     end
+
+    should "not raise error when response is OK" do
+      assert_nothing_raised do
+        @alexa.send :handle_response, Net::HTTPOK.new("1.1", "200", "OK")
+      end
+    end
   end
 
   should "Raise argumment error if keys or host are not present" do
