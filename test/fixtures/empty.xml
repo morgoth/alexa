@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<aws:UrlInfoResponse xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/"><aws:Response xmlns:aws="http://awis.amazonaws.com/doc/2005-07-11"><aws:OperationRequest><aws:RequestId>6a12c8f4-056f-4fce-95cd-2f9d2a353236</aws:RequestId></aws:OperationRequest><aws:UrlInfoResult><aws:Alexa>
+  
+  <aws:ContactInfo>
+    <aws:DataUrl type="canonical">404</aws:DataUrl>
+    <aws:PhoneNumbers>
+      <aws:PhoneNumber/>
+    </aws:PhoneNumbers>
+    <aws:OwnerName/>
+    <aws:Email/>
+    <aws:PhysicalAddress/>
+    <aws:CompanyStockTicker/>
+  </aws:ContactInfo>
+  <aws:ContentData>
+    <aws:DataUrl type="canonical">404</aws:DataUrl>
+    <aws:SiteData>
+      <aws:Title>404</aws:Title>
+    </aws:SiteData>
+    <aws:Speed>
+      <aws:MedianLoadTime/>
+      <aws:Percentile/>
+    </aws:Speed>
+    <aws:AdultContent/>
+    <aws:Language/>
+    <aws:LinksInCount/>
+    <aws:Keywords/>
+    <aws:OwnedDomains/>
+  </aws:ContentData>
+  <aws:Related>
+    <aws:DataUrl type="canonical">404</aws:DataUrl>
+    <aws:RelatedLinks/>
+  </aws:Related>
+  <aws:TrafficData>
+    <aws:DataUrl type="canonical">404</aws:DataUrl>
+    <aws:Rank/>
+    <aws:RankByCountry/>
+    <aws:RankByCity/>
+  </aws:TrafficData>
+</aws:Alexa></aws:UrlInfoResult><aws:ResponseStatus xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/"><aws:StatusCode>Success</aws:StatusCode></aws:ResponseStatus></aws:Response></aws:UrlInfoResponse>

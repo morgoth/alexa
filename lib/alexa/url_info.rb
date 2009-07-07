@@ -28,20 +28,20 @@ module Alexa
       xml = XmlSimple.xml_in(xml.force_encoding(Encoding::UTF_8), 'ForceArray' => false)
       group = response_group.split(',')
       alexa = xml['Response']['UrlInfoResult']['Alexa']
-      @rank = alexa['TrafficData']['Rank'].to_i if group.include?('Rank')
+      @rank = alexa['TrafficData']['Rank'].to_i if group.include?('Rank') and !alexa['TrafficData']['Rank'].empty?
       @data_url = alexa['TrafficData']['DataUrl']['content'] if group.include?('Rank')
       @rank_by_country = alexa['TrafficData']['RankByCountry']['Country'] if group.include?('RankByCountry')
       @rank_by_city = alexa['TrafficData']['RankByCity']['City'] if group.include?('RankByCity')
-      @usage_statistics = alexa['TrafficData']['UsageStatistics']["UsageStatistic"]if group.include?('UsageStats')
+      @usage_statistics = alexa['TrafficData']['UsageStatistics']["UsageStatistic"] if group.include?('UsageStats') and !alexa['TrafficData']['UsageStatistics'].nil?
 
       @site_title = alexa['ContentData']['SiteData']['Title'] if group.include?('SiteData')
       @site_description = alexa['ContentData']['SiteData']['Description'] if group.include?('SiteData')
       @language_locale = alexa['ContentData']['Language']['Locale'] if group.include?('Language')
       @language_encoding = alexa['ContentData']['Language']['Encoding'] if group.include?('Language')
-      @links_in_count = alexa['ContentData']['LinksInCount'].to_i if group.include?('LinksInCount')
+      @links_in_count = alexa['ContentData']['LinksInCount'].to_i if group.include?('LinksInCount') and !alexa['ContentData']['LinksInCount'].empty?
       @keywords = alexa['ContentData']['Keywords']['Keyword'] if group.include?('Keywords')
-      @speed_median_load_time = alexa['ContentData']['Speed']['MedianLoadTime'].to_i if group.include?('Speed')
-      @speed_percentile = alexa['ContentData']['Speed']['Percentile'].to_i if group.include?('Speed')
+      @speed_median_load_time = alexa['ContentData']['Speed']['MedianLoadTime'].to_i if group.include?('Speed') and !alexa['ContentData']['Speed']['MedianLoadTime'].empty?
+      @speed_percentile = alexa['ContentData']['Speed']['Percentile'].to_i if group.include?('Speed') and !alexa['ContentData']['Speed']['Percentile'].empty?
 
       @related_links = alexa['Related']['RelatedLinks']['RelatedLink'] if group.include?('RelatedLinks')
     end

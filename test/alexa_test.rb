@@ -52,7 +52,7 @@ class AlexaTest < Test::Unit::TestCase
         assert_equal "About the university, studies, faculties and departments, photo gallery.", @alexa.site_description
       end
 
-      should "not crush" do
+      should "not crash" do
         assert_nothing_raised do
           @alexa.language_locale
         end
@@ -120,6 +120,70 @@ class AlexaTest < Test::Unit::TestCase
 
       should "return usage statistics" do
         assert_equal 4, @alexa.usage_statistics.count
+      end
+
+    end
+
+    context "should not crash when parsing empty xml response and" do
+      setup do
+        xml = fixture_file('empty.xml')
+        @alexa.parse_xml(xml)
+      end
+
+      should "return nil" do
+        assert_nil @alexa.rank
+      end
+
+      should "return nil" do
+        assert_nil @alexa.data_url
+      end
+
+      should "return nil" do
+        assert_nil @alexa.site_title
+      end
+
+      should "return nil" do
+        assert_nil @alexa.site_description
+      end
+
+      should "return nil" do
+        assert_nil @alexa.language_locale
+      end
+
+      should "return nil" do
+        assert_nil @alexa.language_encoding
+      end
+
+      should "return nil" do
+        assert_nil @alexa.links_in_count
+      end
+
+      should "return nil" do
+        assert_nil @alexa.keywords
+      end
+
+      should "return nil" do
+        assert_nil @alexa.related_links
+      end
+
+      should "return nil" do
+        assert_nil @alexa.speed_median_load_time
+      end
+
+      should "return nil" do
+        assert_nil @alexa.speed_percentile
+      end
+
+      should "return nil" do
+        assert_nil @alexa.rank_by_country
+      end
+
+      should "return nil" do
+        assert_nil @alexa.rank_by_city
+      end
+
+      should "return nil" do
+        assert_nil @alexa.usage_statistics
       end
 
     end
