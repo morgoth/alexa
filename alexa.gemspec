@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{alexa}
-  s.version = "0.0.3"
+  s.version = "0.0.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Wojciech Wnętrzak"]
-  s.date = %q{2009-07-06}
+  s.date = %q{2009-07-07}
   s.email = %q{w.wnetrzak@gmail.com}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
      "lib/alexa.rb",
      "lib/alexa/url_info.rb",
      "test/alexa_test.rb",
+     "test/fixtures/empty.xml",
      "test/fixtures/polsl.xml",
      "test/fixtures/polsl_small.xml",
      "test/test_helper.rb"
