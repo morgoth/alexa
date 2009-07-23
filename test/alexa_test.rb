@@ -4,10 +4,10 @@ class AlexaTest < Test::Unit::TestCase
   context "Alexa::UrlInfo" do
     setup do
       @alexa = Alexa::UrlInfo.new(
-        :access_key_id =>  "12345678901234567890",
-        :secret_access_key =>  "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDF",
-        :host => "some.host"
-        )
+      :access_key_id =>  "12345678901234567890",
+      :secret_access_key =>  "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDF",
+      :host => "some.host"
+      )
     end
 
     should "Generate signature" do
@@ -17,13 +17,13 @@ class AlexaTest < Test::Unit::TestCase
 
     should "Generatee url" do
       url = @alexa.send( :generate_url,
-        "UrlInfo",
-        @alexa.access_key_id,
-        "I1mPdBy+flhhzqqUaamNq9gq190=",
-        '2009-07-03T07:22:24.000Z',
-        "Rank,ContactInfo,AdultContent,Speed,Language,Keywords,OwnedDomains,LinksInCount,SiteData,RelatedLinks",
-        "heroku.com"
-        )
+      "UrlInfo",
+      @alexa.access_key_id,
+      "I1mPdBy+flhhzqqUaamNq9gq190=",
+      '2009-07-03T07:22:24.000Z',
+      "Rank,ContactInfo,AdultContent,Speed,Language,Keywords,OwnedDomains,LinksInCount,SiteData,RelatedLinks",
+      "heroku.com"
+      )
       expected_uri = "/?Action=UrlInfo&AWSAccessKeyId=12345678901234567890&Signature=I1mPdBy%2BflhhzqqUaamNq9gq190%3D&Timestamp=2009-07-03T07%3A22%3A24.000Z&ResponseGroup=Rank%2CContactInfo%2CAdultContent%2CSpeed%2CLanguage%2CKeywords%2COwnedDomains%2CLinksInCount%2CSiteData%2CRelatedLinks&Url=heroku.com"
       assert_equal expected_uri, url.request_uri
       assert_equal "awis.amazonaws.com", url.host
@@ -196,25 +196,25 @@ class AlexaTest < Test::Unit::TestCase
   end
 
   should "Raise argumment error if keys or host are not present" do
-    assert_raise ArgumentError, do
+    assert_raise ArgumentError do
       Alexa::UrlInfo.new(
-        :secret_access_key =>  "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDF",
-        :host => "some.host"
+      :secret_access_key =>  "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDF",
+      :host => "some.host"
       )
     end
-
-    assert_raise ArgumentError, do
+  
+    assert_raise ArgumentError do
       Alexa::UrlInfo.new(
-        :access_key_id =>  "12345678901234567890",
-        :host => "some.host"
+      :access_key_id =>  "12345678901234567890",
+      :host => "some.host"
       )
     end
-
-    assert_raise ArgumentError, do
+  
+    assert_raise ArgumentError do
       Alexa::UrlInfo.new(
-        :access_key_id =>  "12345678901234567890",
-        :secret_access_key =>  "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDF",
+      :access_key_id =>  "12345678901234567890",
+      :secret_access_key =>  "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDF"
       )
     end
   end
-end
+end  
