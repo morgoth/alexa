@@ -25,7 +25,7 @@ module Alexa
     end
 
     def parse_xml(xml)
-      xml = XmlSimple.xml_in(xml.force_encoding(Encoding::UTF_8), 'ForceArray' => false)
+      xml = XmlSimple.xml_in(force_encoding(xml), 'ForceArray' => false)
       group = response_group.split(',')
       alexa = xml['Response']['UrlInfoResult']['Alexa']
       @rank = alexa['TrafficData']['Rank'].to_i if group.include?('Rank') and !alexa['TrafficData']['Rank'].empty?
@@ -47,6 +47,14 @@ module Alexa
     end
 
     private
+
+    def force_encoding(xml)
+      if RUBY_VERSION >= '1.9'
+        xml.force_encoding(Encoding::UTF_8)
+      else
+        xml
+      end
+    end
 
     def handle_response(response)
       case response.code.to_i

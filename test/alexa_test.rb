@@ -15,7 +15,7 @@ class AlexaTest < Test::Unit::TestCase
       assert_equal "I1mPdBy+flhhzqqUaamNq9gq190=", signature
     end
 
-    should "Generatee url" do
+    should "Generate url" do
       url = @alexa.send( :generate_url,
       "UrlInfo",
       @alexa.access_key_id,
@@ -24,8 +24,12 @@ class AlexaTest < Test::Unit::TestCase
       "Rank,ContactInfo,AdultContent,Speed,Language,Keywords,OwnedDomains,LinksInCount,SiteData,RelatedLinks",
       "heroku.com"
       )
-      expected_uri = "/?Action=UrlInfo&AWSAccessKeyId=12345678901234567890&Signature=I1mPdBy%2BflhhzqqUaamNq9gq190%3D&Timestamp=2009-07-03T07%3A22%3A24.000Z&ResponseGroup=Rank%2CContactInfo%2CAdultContent%2CSpeed%2CLanguage%2CKeywords%2COwnedDomains%2CLinksInCount%2CSiteData%2CRelatedLinks&Url=heroku.com"
-      assert_equal expected_uri, url.request_uri
+      if RUBY_VERSION >= '1.9'
+        expected_uri = "/?Action=UrlInfo&AWSAccessKeyId=12345678901234567890&Signature=I1mPdBy%2BflhhzqqUaamNq9gq190%3D&Timestamp=2009-07-03T07%3A22%3A24.000Z&ResponseGroup=Rank%2CContactInfo%2CAdultContent%2CSpeed%2CLanguage%2CKeywords%2COwnedDomains%2CLinksInCount%2CSiteData%2CRelatedLinks&Url=heroku.com"
+      else
+        expected_uri = "/?Action=UrlInfo&Signature=I1mPdBy%2BflhhzqqUaamNq9gq190%3D&AWSAccessKeyId=12345678901234567890&Url=heroku.com&Timestamp=2009-07-03T07%3A22%3A24.000Z&ResponseGroup=Rank%2CContactInfo%2CAdultContent%2CSpeed%2CLanguage%2CKeywords%2COwnedDomains%2CLinksInCount%2CSiteData%2CRelatedLinks"
+        assert_equal expected_uri, url.request_uri
+      end
       assert_equal "awis.amazonaws.com", url.host
     end
 
@@ -202,14 +206,14 @@ class AlexaTest < Test::Unit::TestCase
       :host => "some.host"
       )
     end
-  
+
     assert_raise ArgumentError do
       Alexa::UrlInfo.new(
       :access_key_id =>  "12345678901234567890",
       :host => "some.host"
       )
     end
-  
+
     assert_raise ArgumentError do
       Alexa::UrlInfo.new(
       :access_key_id =>  "12345678901234567890",
