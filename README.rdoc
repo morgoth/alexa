@@ -11,6 +11,9 @@
   :links_in_count, :keywords, :related_links, :speed_median_load_time, :speed_percentile,
   :rank_by_country, :rank_by_city, :usage_statistics
 
+== Contributors
+  * rmoriz[http://github.com/rmoriz]
+
 == Copyright
 
 Copyright (c) 2009 Wojciech Wnętrzak. See LICENSE for details.
