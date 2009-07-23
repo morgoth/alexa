@@ -12,7 +12,7 @@
   :rank_by_country, :rank_by_city, :usage_statistics
 
 == Contributors
-  * rmoriz[http://github.com/rmoriz]
+* rmoriz[http://github.com/rmoriz]
 
 == Copyright
 
