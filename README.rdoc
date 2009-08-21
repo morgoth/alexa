@@ -11,6 +11,11 @@
   :links_in_count, :keywords, :related_links, :speed_median_load_time, :speed_percentile,
   :rank_by_country, :rank_by_city, :usage_statistics
 
+== Installation
+  gem install morgoth-alexa
+or
+  gem install alexa
+
 == Contributors
 * rmoriz[http://github.com/rmoriz]
 
