@@ -13,7 +13,7 @@
 
 == Installation
   gem install morgoth-alexa
-or
+or if you have RubyGem source set to gemcutter[http://gemcutter.org/]
   gem install alexa
 
 == Contributors
