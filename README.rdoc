@@ -12,9 +12,10 @@
   :rank_by_country, :rank_by_city, :usage_statistics
 
 == Installation
+<b>deprecated!</b>
   gem install morgoth-alexa
-or if you have RubyGem source set to gemcutter[http://gemcutter.org/]
-  gem install alexa
+<b>actual</b>
+  gem install alexa --source http://gemcutter.org
 
 == Contributors
 * rmoriz[http://github.com/rmoriz]
