@@ -7,6 +7,7 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "alexa"
+    gem.description = %Q{Alexa Web Information Service library (AWIS)}
     gem.summary = %Q{Alexa Web Information Service library}
     gem.email = "w.wnetrzak@gmail.com"
     gem.homepage = "http://github.com/morgoth/alexa"
