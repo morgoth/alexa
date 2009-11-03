@@ -88,7 +88,7 @@ module Alexa
             "Timestamp"       => timestamp,
             "ResponseGroup"   => response_group,
             "Url"           => host
-          }.to_a.collect{|item| item.first + "=" + CGI::escape(item.last) }.join("&")     # Put key value pairs into http GET format
+          }.to_a.collect{ |item| item.first + "=" + CGI::escape(item.last) }.sort.join("&")
        )
     end
   end

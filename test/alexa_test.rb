@@ -4,9 +4,9 @@ class AlexaTest < Test::Unit::TestCase
   context "Alexa::UrlInfo" do
     setup do
       @alexa = Alexa::UrlInfo.new(
-      :access_key_id =>  "12345678901234567890",
-      :secret_access_key =>  "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDF",
-      :host => "some.host"
+        :access_key_id =>  "12345678901234567890",
+        :secret_access_key =>  "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDF",
+        :host => "some.host"
       )
     end
 
@@ -16,7 +16,7 @@ class AlexaTest < Test::Unit::TestCase
     end
 
     should "Generate url" do
-      url = @alexa.send( :generate_url,
+      url = @alexa.send(:generate_url,
       "UrlInfo",
       @alexa.access_key_id,
       "I1mPdBy+flhhzqqUaamNq9gq190=",
@@ -24,12 +24,8 @@ class AlexaTest < Test::Unit::TestCase
       "Rank,ContactInfo,AdultContent,Speed,Language,Keywords,OwnedDomains,LinksInCount,SiteData,RelatedLinks",
       "heroku.com"
       )
-      if RUBY_VERSION >= '1.9'
-        expected_uri = "/?Action=UrlInfo&AWSAccessKeyId=12345678901234567890&Signature=I1mPdBy%2BflhhzqqUaamNq9gq190%3D&Timestamp=2009-07-03T07%3A22%3A24.000Z&ResponseGroup=Rank%2CContactInfo%2CAdultContent%2CSpeed%2CLanguage%2CKeywords%2COwnedDomains%2CLinksInCount%2CSiteData%2CRelatedLinks&Url=heroku.com"
-      else
-        expected_uri = "/?Action=UrlInfo&Signature=I1mPdBy%2BflhhzqqUaamNq9gq190%3D&AWSAccessKeyId=12345678901234567890&Url=heroku.com&Timestamp=2009-07-03T07%3A22%3A24.000Z&ResponseGroup=Rank%2CContactInfo%2CAdultContent%2CSpeed%2CLanguage%2CKeywords%2COwnedDomains%2CLinksInCount%2CSiteData%2CRelatedLinks"
-        assert_equal expected_uri, url.request_uri
-      end
+      expected_uri = "/?AWSAccessKeyId=12345678901234567890&Action=UrlInfo&ResponseGroup=Rank%2CContactInfo%2CAdultContent%2CSpeed%2CLanguage%2CKeywords%2COwnedDomains%2CLinksInCount%2CSiteData%2CRelatedLinks&Signature=I1mPdBy%2BflhhzqqUaamNq9gq190%3D&Timestamp=2009-07-03T07%3A22%3A24.000Z&Url=heroku.com"
+      assert_equal expected_uri, url.request_uri
       assert_equal "awis.amazonaws.com", url.host
     end
 
@@ -103,7 +99,7 @@ class AlexaTest < Test::Unit::TestCase
       end
 
       should "return related links" do
-        assert_equal 10, @alexa.related_links.count
+        assert_equal 10, @alexa.related_links.size
       end
 
       should "return speed_median load time" do
@@ -115,17 +111,16 @@ class AlexaTest < Test::Unit::TestCase
       end
 
       should "return rank by country" do
-        assert_equal 3, @alexa.rank_by_country.count
+        assert_equal 3, @alexa.rank_by_country.size
       end
 
       should "return rank by city" do
-        assert_equal 68, @alexa.rank_by_city.count
+        assert_equal 68, @alexa.rank_by_city.size
       end
 
       should "return usage statistics" do
-        assert_equal 4, @alexa.usage_statistics.count
+        assert_equal 4, @alexa.usage_statistics.size
       end
-
     end
 
     context "should not crash when parsing empty xml response and" do
@@ -134,62 +129,61 @@ class AlexaTest < Test::Unit::TestCase
         @alexa.parse_xml(xml)
       end
 
-      should "return nil" do
+      should "return nil from rank" do
         assert_nil @alexa.rank
       end
 
-      should "return nil" do
-        assert_nil @alexa.data_url
+      should "return nil from data_url" do
+        assert_equal "404", @alexa.data_url
       end
 
-      should "return nil" do
-        assert_nil @alexa.site_title
+      should "return nil from site_title" do
+        assert_equal "404", @alexa.site_title
       end
 
-      should "return nil" do
+      should "return nil from site_description" do
         assert_nil @alexa.site_description
       end
 
-      should "return nil" do
+      should "return nil from language_locale" do
         assert_nil @alexa.language_locale
       end
 
-      should "return nil" do
+      should "return nil from language_encoding" do
         assert_nil @alexa.language_encoding
       end
 
-      should "return nil" do
+      should "return nil from links_in_count" do
         assert_nil @alexa.links_in_count
       end
 
-      should "return nil" do
+      should "return nil from keywords" do
         assert_nil @alexa.keywords
       end
 
-      should "return nil" do
+      should "return nil from related_links" do
         assert_nil @alexa.related_links
       end
 
-      should "return nil" do
+      should "return nil from speed_median_load_time" do
         assert_nil @alexa.speed_median_load_time
       end
 
-      should "return nil" do
+      should "return nil from speed_percentile" do
         assert_nil @alexa.speed_percentile
       end
 
-      should "return nil" do
+      should "return nil from rank_by_country" do
         assert_nil @alexa.rank_by_country
       end
 
-      should "return nil" do
+      should "return nil from rank_by_city" do
         assert_nil @alexa.rank_by_city
       end
 
-      should "return nil" do
+      should "return nil from usage_statistics" do
         assert_nil @alexa.usage_statistics
       end
-
     end
 
     should "not raise error when response is OK" do
@@ -221,4 +215,4 @@ class AlexaTest < Test::Unit::TestCase
       )
     end
   end
-end  
+end
