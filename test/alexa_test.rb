@@ -11,14 +11,14 @@ class AlexaTest < Test::Unit::TestCase
     end
 
     should "Generate signature" do
-      signature = @alexa.send :generate_signature, @alexa.secret_access_key, "UrlInfo", '2009-07-03T07:22:24.000Z'
+      signature = @alexa.send :generate_signature, Alexa.config.secret_access_key, "UrlInfo", '2009-07-03T07:22:24.000Z'
       assert_equal "I1mPdBy+flhhzqqUaamNq9gq190=", signature
     end
 
     should "Generate url" do
       url = @alexa.send(:generate_url,
       "UrlInfo",
-      @alexa.access_key_id,
+      Alexa.config.access_key_id,
       "I1mPdBy+flhhzqqUaamNq9gq190=",
       '2009-07-03T07:22:24.000Z',
       "Rank,ContactInfo,AdultContent,Speed,Language,Keywords,OwnedDomains,LinksInCount,SiteData,RelatedLinks",
@@ -190,29 +190,6 @@ class AlexaTest < Test::Unit::TestCase
       assert_nothing_raised do
         @alexa.send :handle_response, Net::HTTPOK.new("1.1", "200", "OK")
       end
-    end
-  end
-
-  should "Raise argumment error if keys or host are not present" do
-    assert_raise ArgumentError do
-      Alexa::UrlInfo.new(
-      :secret_access_key =>  "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDF",
-      :host => "some.host"
-      )
-    end
-
-    assert_raise ArgumentError do
-      Alexa::UrlInfo.new(
-      :access_key_id =>  "12345678901234567890",
-      :host => "some.host"
-      )
-    end
-
-    assert_raise ArgumentError do
-      Alexa::UrlInfo.new(
-      :access_key_id =>  "12345678901234567890",
-      :secret_access_key =>  "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDF"
-      )
     end
   end
 end

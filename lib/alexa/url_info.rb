@@ -1,23 +1,25 @@
 module Alexa
   class UrlInfo
     RESPONSE_GROUP = "Rank,ContactInfo,AdultContent,Speed,Language,Keywords,OwnedDomains,LinksInCount,SiteData,RelatedLinks,RankByCountry,RankByCity,UsageStats"
-    attr_accessor :access_key_id, :secret_access_key, :host, :response_group, :xml_response,
+    attr_accessor :host, :response_group, :xml_response,
       :rank, :data_url, :site_title, :site_description, :language_locale, :language_encoding,
       :links_in_count, :keywords, :related_links, :speed_median_load_time, :speed_percentile,
       :rank_by_country, :rank_by_city, :usage_statistics
 
-    def initialize(options = {} )
-      @access_key_id = options[:access_key_id] or raise ArgumentError.new("you must specify access_key_id")
-      @secret_access_key = options[:secret_access_key] or raise ArgumentError.new("you must specify secret_access_key")
+    def initialize(options = {})
+      Alexa.config.access_key_id = options[:access_key_id] || Alexa.config.access_key_id
+      Alexa.config.secret_access_key = options[:secret_access_key] || Alexa.config.secret_access_key
+      raise ArgumentError.new("you must specify access_key_id") if Alexa.config.access_key_id.nil?
+      raise ArgumentError.new("you must specify secret_access_key") if Alexa.config.secret_access_key.nil?
       @host = options[:host] or raise ArgumentError.new("you must specify host")
       @response_group = options[:response_group] || RESPONSE_GROUP
     end
 
     def connect
       action = "UrlInfo"
-      timestamp = ( Time::now ).utc.strftime("%Y-%m-%dT%H:%M:%S.000Z")
-      signature = generate_signature(secret_access_key, action, timestamp)
-      url = generate_url(action, access_key_id, signature, timestamp, response_group, host)
+      timestamp = Time::now.utc.strftime("%Y-%m-%dT%H:%M:%S.000Z")
+      signature = generate_signature(Alexa.config.secret_access_key, action, timestamp)
+      url = generate_url(action, Alexa.config.access_key_id, signature, timestamp, response_group, host)
       response = Net::HTTP.start(url.host) do |http|
         http.get url.request_uri
       end
@@ -74,7 +76,7 @@ module Alexa
       end
     end
 
-    def generate_signature(secret_acces_key, action, timestamp)
+    def generate_signature(secret_access_key, action, timestamp)
       Base64.encode64( OpenSSL::HMAC.digest( OpenSSL::Digest::Digest.new( "sha1" ), secret_access_key, action + timestamp)).strip
     end
 

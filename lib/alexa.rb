@@ -8,6 +8,7 @@ require "net/https"
 require "xmlsimple"
 require "time"
 
+require 'alexa/config'
 require 'alexa/url_info'
 
 module Alexa
