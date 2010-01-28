@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class AlexaTest < Test::Unit::TestCase
+class UrlInfoTest < Test::Unit::TestCase
   context "Alexa::UrlInfo" do
     setup do
       @alexa = Alexa::UrlInfo.new(
