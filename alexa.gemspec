@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{alexa}
-  s.version = "0.0.7"
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Wojciech Wnętrzak"]
-  s.date = %q{2009-11-03}
+  s.date = %q{2010-01-28}
   s.description = %q{Alexa Web Information Service library (AWIS)}
   s.email = %q{w.wnetrzak@gmail.com}
   s.extra_rdoc_files = [
@@ -25,12 +25,14 @@ Gem::Specification.new do |s|
      "VERSION",
      "alexa.gemspec",
      "lib/alexa.rb",
+     "lib/alexa/config.rb",
      "lib/alexa/url_info.rb",
-     "test/alexa_test.rb",
+     "test/config_test.rb",
      "test/fixtures/empty.xml",
      "test/fixtures/polsl.xml",
      "test/fixtures/polsl_small.xml",
-     "test/test_helper.rb"
+     "test/test_helper.rb",
+     "test/url_info_test.rb"
   ]
   s.homepage = %q{http://github.com/morgoth/alexa}
   s.rdoc_options = ["--charset=UTF-8"]
@@ -38,7 +40,8 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.5}
   s.summary = %q{Alexa Web Information Service library}
   s.test_files = [
-    "test/alexa_test.rb",
+    "test/url_info_test.rb",
+     "test/config_test.rb",
      "test/test_helper.rb"
   ]
 
