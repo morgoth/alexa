@@ -11,11 +11,14 @@
   :links_in_count, :keywords, :related_links, :speed_median_load_time, :speed_percentile,
   :rank_by_country, :rank_by_city, :usage_statistics
 
+You can set configuration in block like this:
+  Alexa.config do |c|
+    c.access_key_id = "key"
+    c.secret_access_key = "secret"
+  end
+
 == Installation
-<b>deprecated!</b>
-  gem install morgoth-alexa
-<b>actual</b>
-  gem install alexa --source http://gemcutter.org
+  gem install alexa
 
 == Contributors
 * rmoriz[http://github.com/rmoriz]
