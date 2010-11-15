@@ -84,12 +84,12 @@ module Alexa
       url = URI.parse(
           "http://awis.amazonaws.com/?" +
           {
-            "Action"       => action,
-            "AWSAccessKeyId"  => access_key_id,
-            "Signature"       => signature,
-            "Timestamp"       => timestamp,
-            "ResponseGroup"   => response_group,
-            "Url"           => host
+            "Action"         => action,
+            "AWSAccessKeyId" => access_key_id,
+            "Signature"      => signature,
+            "Timestamp"      => timestamp,
+            "ResponseGroup"  => response_group,
+            "Url"            => host
           }.to_a.collect{ |item| item.first + "=" + CGI::escape(item.last) }.sort.join("&")
        )
     end

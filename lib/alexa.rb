@@ -1,4 +1,3 @@
-#/usr/bin/ruby
 require "cgi"
 require "base64"
 require "openssl"
@@ -8,8 +7,9 @@ require "net/https"
 require "xmlsimple"
 require "time"
 
-require 'alexa/config'
-require 'alexa/url_info'
+require "alexa/config"
+require "alexa/url_info"
+require "alexa/version"
 
 module Alexa
   def self.url_info(options = {})
@@ -19,4 +19,3 @@ module Alexa
     url_info
   end
 end
-

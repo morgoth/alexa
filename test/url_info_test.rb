@@ -1,4 +1,4 @@
-require 'test_helper'
+require 'helper'
 
 class UrlInfoTest < Test::Unit::TestCase
   context "Alexa::UrlInfo" do

@@ -1,4 +1,4 @@
-require 'test_helper'
+require 'helper'
 
 class ConfigTest < Test::Unit::TestCase
   context "Config test" do

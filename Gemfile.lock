@@ -1,0 +1,23 @@
+PATH
+  remote: .
+  specs:
+    alexa (0.1.0)
+      xml-simple
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    rake (0.8.7)
+    shoulda (2.11.3)
+    test-unit (2.1.1)
+    xml-simple (1.0.12)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  alexa!
+  rake
+  shoulda
+  test-unit
+  xml-simple
