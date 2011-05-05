@@ -1,7 +1,7 @@
 require "helper"
 
-class UrlInfoTest < Test::Unit::TestCase
-  def setup
+describe "Alexa::UlrInfo" do
+  before do
     @alexa = Alexa::UrlInfo.new(
       :access_key_id => "12345678901234567890",
       :secret_access_key => "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDF",
@@ -9,12 +9,12 @@ class UrlInfoTest < Test::Unit::TestCase
     )
   end
 
-  should "Generate signature" do
+  it "should Generate signature" do
     @alexa.stubs(:timestamp).returns("2009-07-03T07:22:24.000Z")
     assert_equal "I1mPdBy+flhhzqqUaamNq9gq190=", @alexa.send(:signature)
   end
 
-  should "Generate url" do
+  it "should Generate url" do
     @alexa.stubs(:timestamp).returns("2009-07-03T07:22:24.000Z")
     @alexa.response_group = "Rank,ContactInfo,AdultContent,Speed,Language,Keywords,OwnedDomains,LinksInCount,SiteData,RelatedLinks"
     @alexa.host = "heroku.com"
@@ -23,166 +23,157 @@ class UrlInfoTest < Test::Unit::TestCase
     assert_equal "awis.amazonaws.com", @alexa.send(:url).host
   end
 
-  context "should parse xml return by options LinksInCount,SiteData" do
-    setup do
+  describe "parsing xml returned by options LinksInCount,SiteData" do
+    before do
       @alexa.response_group = "Rank,LinksInCount,SiteData"
       xml = fixture_file('polsl_small.xml')
       @alexa.parse_xml(xml)
     end
 
-    should "return rank" do
+    it "should return rank" do
       assert_equal 86020, @alexa.rank
     end
 
-    should "return data url" do
+    it "should return data url" do
       assert_equal "polsl.pl/", @alexa.data_url
     end
 
-    should "return site title" do
+    it "should return site title" do
       assert_equal "Silesian University of Technology", @alexa.site_title
     end
 
-    should "return site description" do
+    it "should return site description" do
       assert_equal "About the university, studies, faculties and departments, photo gallery.", @alexa.site_description
     end
 
-    should "not crash" do
-      assert_nothing_raised do
-        @alexa.language_locale
-      end
+    it "should not crash" do
       assert_nil @alexa.language_locale
     end
   end
 
-  context "should parse xml with all options" do
-    setup do
+  describe "parsing xml with all options" do
+    before do
       xml = fixture_file('polsl.xml')
       @alexa.parse_xml(xml)
     end
 
-    should "return rank" do
+    it "should return rank" do
       assert_equal 86020, @alexa.rank
     end
 
-    should "return data url" do
+    it "should return data url" do
       assert_equal "polsl.pl", @alexa.data_url
     end
 
-    should "return site title" do
+    it "should return site title" do
       assert_equal "Silesian University of Technology", @alexa.site_title
     end
 
-    should "return site description" do
+    it "should return site description" do
       assert_equal "About the university, studies, faculties and departments, photo gallery.", @alexa.site_description
     end
 
-    should "return language locale" do
+    it "should return language locale" do
       assert_equal "pl-PL", @alexa.language_locale
     end
 
-    should "return language encoding" do
+    it "should return language encoding" do
       assert_equal "iso-8859-2", @alexa.language_encoding
     end
 
-    should "return links in count" do
+    it "should return links in count" do
       assert_equal 281, @alexa.links_in_count
     end
 
-    should "return keywords" do
+    it "should return keywords" do
       assert_equal ["Polska", "Regionalne", "Gliwice"], @alexa.keywords
     end
 
-    should "return related links" do
+    it "should return related links" do
       assert_equal 10, @alexa.related_links.size
     end
 
-    should "return speed_median load time" do
+    it "should return speed_median load time" do
       assert_equal 266, @alexa.speed_median_load_time
     end
 
-    should "return speed percentile" do
+    it "should return speed percentile" do
       assert_equal 98, @alexa.speed_percentile
     end
 
-    should "return rank by country" do
+    it "should return rank by country" do
       assert_equal 3, @alexa.rank_by_country.size
     end
 
-    should "return rank by city" do
+    it "should return rank by city" do
       assert_equal 68, @alexa.rank_by_city.size
     end
 
-    should "return usage statistics" do
+    it "should return usage statistics" do
       assert_equal 4, @alexa.usage_statistics.size
     end
   end
 
-  context "should not crash when parsing empty xml response" do
-    setup do
+  describe "parsing empty xml response" do
+    before do
       xml = fixture_file('empty.xml')
       @alexa.parse_xml(xml)
     end
 
-    should "return nil from rank" do
+    it "should return nil from rank" do
       assert_nil @alexa.rank
     end
 
-    should "return nil from data_url" do
+    it "should return nil from data_url" do
       assert_equal "404", @alexa.data_url
     end
 
-    should "return nil from site_title" do
+    it "should return nil from site_title" do
       assert_equal "404", @alexa.site_title
     end
 
-    should "return nil from site_description" do
+    it "should return nil from site_description" do
       assert_nil @alexa.site_description
     end
 
-    should "return nil from language_locale" do
+    it "should return nil from language_locale" do
       assert_nil @alexa.language_locale
     end
 
-    should "return nil from language_encoding" do
+    it "should return nil from language_encoding" do
       assert_nil @alexa.language_encoding
     end
 
-    should "return nil from links_in_count" do
+    it "should return nil from links_in_count" do
       assert_nil @alexa.links_in_count
     end
 
-    should "return nil from keywords" do
+    it "should return nil from keywords" do
       assert_nil @alexa.keywords
     end
 
-    should "return nil from related_links" do
+    it "should return nil from related_links" do
       assert_nil @alexa.related_links
     end
 
-    should "return nil from speed_median_load_time" do
+    it "should return nil from speed_median_load_time" do
       assert_nil @alexa.speed_median_load_time
     end
 
-    should "return nil from speed_percentile" do
+    it "should return nil from speed_percentile" do
       assert_nil @alexa.speed_percentile
     end
 
-    should "return nil from rank_by_country" do
+    it "should return nil from rank_by_country" do
       assert_nil @alexa.rank_by_country
     end
 
-    should "return nil from rank_by_city" do
+    it "should return nil from rank_by_city" do
       assert_nil @alexa.rank_by_city
     end
 
-    should "return nil from usage_statistics" do
+    it "should return nil from usage_statistics" do
       assert_nil @alexa.usage_statistics
-    end
-  end
-
-  should "not raise error when response is OK" do
-    assert_nothing_raised do
-      @alexa.send :handle_response, Net::HTTPOK.new("1.1", "200", "OK")
     end
   end
 end

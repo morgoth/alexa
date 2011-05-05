@@ -21,7 +21,5 @@ Gem::Specification.new do |s|
 
   s.add_dependency "xml-simple"
 
-  s.add_development_dependency "test-unit"
-  s.add_development_dependency "shoulda"
   s.add_development_dependency "mocha"
 end

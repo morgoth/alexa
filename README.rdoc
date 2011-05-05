@@ -25,4 +25,4 @@ You can set configuration in block like this:
 
 == Copyright
 
-Copyright (c) 2010 Wojciech Wnętrzak. See LICENSE for details.
+Copyright (c) 2011 Wojciech Wnętrzak. See LICENSE for details.
