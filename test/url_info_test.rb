@@ -11,14 +11,14 @@ describe "Alexa::UlrInfo" do
 
   it "should Generate signature" do
     @alexa.stubs(:timestamp).returns("2009-07-03T07:22:24.000Z")
-    assert_equal "I1mPdBy+flhhzqqUaamNq9gq190=", @alexa.send(:signature)
+    assert_equal "5Jql3rds3vL9hyijnYtUIVv1H8Q=", @alexa.send(:signature)
   end
 
   it "should Generate url" do
     @alexa.stubs(:timestamp).returns("2009-07-03T07:22:24.000Z")
     @alexa.response_group = "Rank,ContactInfo,AdultContent,Speed,Language,Keywords,OwnedDomains,LinksInCount,SiteData,RelatedLinks"
     @alexa.host = "heroku.com"
-    expected_uri = "/?AWSAccessKeyId=12345678901234567890&Action=UrlInfo&ResponseGroup=Rank%2CContactInfo%2CAdultContent%2CSpeed%2CLanguage%2CKeywords%2COwnedDomains%2CLinksInCount%2CSiteData%2CRelatedLinks&Signature=I1mPdBy%2BflhhzqqUaamNq9gq190%3D&Timestamp=2009-07-03T07%3A22%3A24.000Z&Url=heroku.com&Version=2005-07-11"
+    expected_uri = "/?AWSAccessKeyId=12345678901234567890&Action=UrlInfo&ResponseGroup=Rank%2CContactInfo%2CAdultContent%2CSpeed%2CLanguage%2CKeywords%2COwnedDomains%2CLinksInCount%2CSiteData%2CRelatedLinks&SignatureMethod=HmacSHA1&SignatureVersion=2&Timestamp=2009-07-03T07%3A22%3A24.000Z&Url=heroku.com&Version=2005-07-11&Signature=H9VtDwXGXT5O8NodLOlsc2wIfv8%3D"
     assert_equal expected_uri, @alexa.send(:url).request_uri
     assert_equal "awis.amazonaws.com", @alexa.send(:url).host
   end

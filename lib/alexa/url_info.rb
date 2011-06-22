@@ -1,6 +1,7 @@
 module Alexa
   class UrlInfo
     API_VERSION = "2005-07-11"
+    HOST = "awis.amazonaws.com"
     RESPONSE_GROUP = "Rank,ContactInfo,AdultContent,Speed,Language,Keywords,OwnedDomains,LinksInCount,SiteData,RelatedLinks,RankByCountry,RankByCity,UsageStats"
 
     attr_accessor :host, :response_group, :xml_response,
@@ -79,21 +80,32 @@ module Alexa
     end
 
     def signature
-      @signature ||= Base64.encode64(OpenSSL::HMAC.digest(OpenSSL::Digest::Digest.new("sha1"), Alexa.config.secret_access_key, "UrlInfo" + timestamp)).strip
+      Base64.encode64(OpenSSL::HMAC.digest(OpenSSL::Digest::Digest.new("sha1"), Alexa.config.secret_access_key, sign)).strip
     end
 
     def url
-      URI.parse("http://awis.amazonaws.com/?" +
-        {
-          "Action"         => "UrlInfo",
-          "AWSAccessKeyId" => Alexa.config.access_key_id,
-          "Signature"      => signature,
-          "Timestamp"      => timestamp,
-          "ResponseGroup"  => response_group,
-          "Url"            => host,
-          "Version"        => API_VERSION
-        }.map { |key, value| "#{key}=#{CGI::escape(value)}" }.sort.join("&")
-      )
+      URI.parse("http://#{HOST}/?" + query + "&Signature=" + CGI::escape(signature))
+    end
+
+    def params_without_signature
+      {
+        "Action"           => "UrlInfo",
+        "AWSAccessKeyId"   => Alexa.config.access_key_id,
+        "ResponseGroup"    => response_group,
+        "SignatureMethod"  => "HmacSHA1",
+        "SignatureVersion" => "2",
+        "Timestamp"        => timestamp,
+        "Url"              => host,
+        "Version"          => API_VERSION
+      }
+    end
+
+    def sign
+      "GET\n" + HOST + "\n/\n" + query
+    end
+
+    def query
+      params_without_signature.map { |key, value| "#{key}=#{CGI::escape(value)}" }.sort.join("&")
     end
   end
 end
