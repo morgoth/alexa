@@ -1,25 +1,21 @@
 # -*- encoding: utf-8 -*-
-$:.push File.expand_path("../lib", __FILE__)
-require "alexa/version"
+require File.expand_path('../lib/alexa/version', __FILE__)
 
-Gem::Specification.new do |s|
-  s.name        = "alexa"
-  s.version     = Alexa::VERSION
-  s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Wojciech Wnętrzak"]
-  s.email       = ["w.wnetrzak@gmail.com"]
-  s.homepage    = "https://github.com/morgoth/alexa"
-  s.summary     = %q{Alexa Web Information Service library}
-  s.description = %q{Alexa Web Information Service library (AWIS)}
+Gem::Specification.new do |gem|
+  gem.authors       = ["Wojciech Wnętrzak"]
+  gem.email         = ["w.wnetrzak@gmail.com"]
+  gem.description   = %q{Alexa Web Information Service library (AWIS)}
+  gem.summary       = %q{Alexa Web Information Service library}
+  gem.homepage      = "https://github.com/morgoth/alexa"
 
-  s.rubyforge_project = "alexa"
+  gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  gem.files         = `git ls-files`.split("\n")
+  gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
+  gem.name          = "alexa"
+  gem.require_paths = ['lib']
+  gem.version       = Alexa::VERSION
 
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
-  s.require_paths = ["lib"]
+  gem.add_dependency "xml-simple"
 
-  s.add_dependency "xml-simple"
-
-  s.add_development_dependency "mocha"
+  gem.add_development_dependency "mocha"
 end
