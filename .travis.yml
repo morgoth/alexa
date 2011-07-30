@@ -1,0 +1,4 @@
+notifications:
+  disabled: true
+rvm:
+  - 1.9.2
