@@ -34,6 +34,9 @@ You can set configuration in block like this:
 
 * [rmoriz](https://github.com/rmoriz)
 
+## Continuous Integration ##
+[![Build Status](https://secure.travis-ci.org/morgoth/alexa.png)](http://travis-ci.org/morgoth/alexa)
+
 ## Copyright ##
 
 Copyright (c) 2011 Wojciech Wnętrzak. See LICENSE for details.
