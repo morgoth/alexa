@@ -4,8 +4,9 @@ require "openssl"
 require "digest/sha1"
 require "uri"
 require "net/https"
-require "xmlsimple"
 require "time"
+
+require "multi_xml"
 
 require "alexa/config"
 require "alexa/url_info"

@@ -26,25 +26,25 @@ module Alexa
     end
 
     def parse_xml(xml)
-      xml = XmlSimple.xml_in(force_encoding(xml), 'ForceArray' => false)
+      xml = MultiXml.parse(force_encoding(xml))
       group = response_group.split(',')
-      alexa = xml['Response']['UrlInfoResult']['Alexa']
-      self.rank = alexa['TrafficData']['Rank'].to_i if group.include?('Rank') and !alexa['TrafficData']['Rank'].empty?
-      self.data_url = alexa['TrafficData']['DataUrl']['content'] if group.include?('Rank')
-      self.rank_by_country = alexa['TrafficData']['RankByCountry']['Country'] if group.include?('RankByCountry')
-      self.rank_by_city = alexa['TrafficData']['RankByCity']['City'] if group.include?('RankByCity')
-      self.usage_statistics = alexa['TrafficData']['UsageStatistics']["UsageStatistic"] if group.include?('UsageStats') and !alexa['TrafficData']['UsageStatistics'].nil?
+      alexa = xml["UrlInfoResponse"]["Response"]["UrlInfoResult"]["Alexa"]
+      self.rank = alexa['TrafficData']['Rank'].to_i if group.include?('Rank') && !alexa['TrafficData']['Rank'].nil?
+      self.data_url = alexa['TrafficData']['DataUrl'] if group.include?('Rank')
+      self.rank_by_country = alexa['TrafficData']['RankByCountry']['Country'] if group.include?('RankByCountry') && !alexa['TrafficData']['RankByCountry'].nil?
+      self.rank_by_city = alexa['TrafficData']['RankByCity']['City'] if group.include?('RankByCity') && !alexa['TrafficData']['RankByCity'].nil?
+      self.usage_statistics = alexa['TrafficData']['UsageStatistics']["UsageStatistic"] if group.include?('UsageStats') && !alexa['TrafficData']['UsageStatistics'].nil?
 
       self.site_title = alexa['ContentData']['SiteData']['Title'] if group.include?('SiteData')
       self.site_description = alexa['ContentData']['SiteData']['Description'] if group.include?('SiteData')
-      self.language_locale = alexa['ContentData']['Language']['Locale'] if group.include?('Language')
-      self.language_encoding = alexa['ContentData']['Language']['Encoding'] if group.include?('Language')
-      self.links_in_count = alexa['ContentData']['LinksInCount'].to_i if group.include?('LinksInCount') and !alexa['ContentData']['LinksInCount'].empty?
-      self.keywords = alexa['ContentData']['Keywords']['Keyword'] if group.include?('Keywords')
-      self.speed_median_load_time = alexa['ContentData']['Speed']['MedianLoadTime'].to_i if group.include?('Speed') and !alexa['ContentData']['Speed']['MedianLoadTime'].empty?
-      self.speed_percentile = alexa['ContentData']['Speed']['Percentile'].to_i if group.include?('Speed') and !alexa['ContentData']['Speed']['Percentile'].empty?
+      self.language_locale = alexa['ContentData']['Language']['Locale'] if group.include?('Language') && !alexa['ContentData']['Language'].nil?
+      self.language_encoding = alexa['ContentData']['Language']['Encoding'] if group.include?('Language') && !alexa['ContentData']['Language'].nil?
+      self.links_in_count = alexa['ContentData']['LinksInCount'].to_i if group.include?('LinksInCount') && !alexa['ContentData']['LinksInCount'].nil?
+      self.keywords = alexa['ContentData']['Keywords']['Keyword'] if group.include?('Keywords') && !alexa['ContentData']['Keywords'].nil?
+      self.speed_median_load_time = alexa['ContentData']['Speed']['MedianLoadTime'].to_i if group.include?('Speed') && !alexa['ContentData']['Speed']['MedianLoadTime'].nil?
+      self.speed_percentile = alexa['ContentData']['Speed']['Percentile'].to_i if group.include?('Speed') && !alexa['ContentData']['Speed']['Percentile'].nil?
 
-      self.related_links = alexa['Related']['RelatedLinks']['RelatedLink'] if group.include?('RelatedLinks')
+      self.related_links = alexa['Related']['RelatedLinks']['RelatedLink'] if group.include?('RelatedLinks') && !alexa['Related']['RelatedLinks'].nil?
     end
 
     private
