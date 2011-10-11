@@ -7,9 +7,9 @@ require "mocha"
 
 require "alexa"
 
-if ENV["xml_parser"]
-  require ENV["xml_parser"] if ["nokogiri", "libxml", "ox"].include?(ENV["xml_parser"])
-  MultiXml.parser = ENV["xml_parser"]
+if ENV["XML_PARSER"]
+  require ENV["XML_PARSER"] if ["nokogiri", "libxml", "ox"].include?(ENV["XML_PARSER"])
+  MultiXml.parser = ENV["XML_PARSER"]
 end
 
 class MiniTest::Unit::TestCase

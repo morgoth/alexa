@@ -2,3 +2,9 @@ notifications:
   disabled: true
 rvm:
   - 1.9.2
+env:
+  - XML_PARSER=rexml
+  - XML_PARSER=nokogiri
+  - XML_PARSER=libxml
+  # does not work yet
+  # - XML_PARSER=ox
