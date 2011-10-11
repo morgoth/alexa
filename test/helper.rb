@@ -1,10 +1,16 @@
 require "bundler/setup"
 
+require "ruby-debug"
 require "minitest/autorun"
 require "fakeweb"
 require "mocha"
 
 require "alexa"
+
+if ENV["xml_parser"]
+  require ENV["xml_parser"] if ["nokogiri", "libxml", "ox"].include?(ENV["xml_parser"])
+  MultiXml.parser = ENV["xml_parser"]
+end
 
 class MiniTest::Unit::TestCase
   def setup
