@@ -26,7 +26,7 @@ describe "Alexa::UlrInfo" do
   describe "parsing xml returned by options LinksInCount,SiteData" do
     before do
       @alexa.response_group = "Rank,LinksInCount,SiteData"
-      xml = fixture_file('polsl_small.xml')
+      xml = fixture_xml('polsl_small.xml')
       @alexa.parse_xml(xml)
     end
 
@@ -53,7 +53,7 @@ describe "Alexa::UlrInfo" do
 
   describe "parsing xml with all options" do
     before do
-      xml = fixture_file('polsl.xml')
+      xml = fixture_xml('polsl.xml')
       @alexa.parse_xml(xml)
     end
 
@@ -116,7 +116,7 @@ describe "Alexa::UlrInfo" do
 
   describe "parsing empty xml response" do
     before do
-      xml = fixture_file('empty.xml')
+      xml = fixture_xml('empty.xml')
       @alexa.parse_xml(xml)
     end
 
@@ -174,6 +174,18 @@ describe "Alexa::UlrInfo" do
 
     it "should return nil from usage_statistics" do
       assert_nil @alexa.usage_statistics
+    end
+  end
+
+  describe "parsing xml with auth failure" do
+    before do
+      FakeWeb.register_uri(:get, %r{http://awis.amazonaws.com}, :response => fixture("auth_failure.txt"))
+    end
+
+    it "should raise error" do
+      assert_raises StandardError do
+        @alexa.connect
+      end
     end
   end
 end

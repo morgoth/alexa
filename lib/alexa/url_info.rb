@@ -70,8 +70,8 @@ module Alexa
           raise StandardError.new(response)
         else
           @xml_response = response.body
-          xml = XmlSimple.xml_in(response.body, 'ForceArray' => false)
-          message = xml['Errors']['Error']['Message']
+          xml = MultiXml.parse(@xml_response)
+          message = xml["Response"]["Errors"]["Error"]["Message"]
           raise StandardError.new(message)
         end
       else

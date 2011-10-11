@@ -1,0 +1,7 @@
+HTTP/1.1 401 Unauthorized
+Server: Apache-Coyote/1.1
+Transfer-Encoding: chunked
+Date: Tue, 11 Oct 2011 20:16:19 GMT
+
+<?xml version="1.0"?>
+<Response><Errors><Error><Code>AuthFailure</Code><Message>AWS was not able to authenticate the request: access credentials are missing</Message></Error></Errors><RequestID>57d5192f-803a-1d6f-a50a-c354840a02b9</RequestID></Response>

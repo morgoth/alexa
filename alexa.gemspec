@@ -18,4 +18,5 @@ Gem::Specification.new do |gem|
   gem.add_dependency "multi_xml"
 
   gem.add_development_dependency "mocha"
+  gem.add_development_dependency "fakeweb"
 end
