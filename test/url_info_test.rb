@@ -177,12 +177,35 @@ describe "Alexa::UlrInfo" do
     end
   end
 
-  describe "parsing xml with auth failure" do
-    before do
-      FakeWeb.register_uri(:get, %r{http://awis.amazonaws.com}, :response => fixture("auth_failure.txt"))
+  describe "with github.com full response group" do
+    it "should successfuly connect" do
+      FakeWeb.register_uri(:get, %r{http://awis.amazonaws.com}, :response => fixture("github_full.txt"))
+      @alexa.connect
+      @alexa.parse_xml(@alexa.xml_response)
+      assert_equal 551, @alexa.rank
+    end
+  end
+
+  describe "with github.com rank response group" do
+    it "should successfuly connect" do
+      FakeWeb.register_uri(:get, %r{http://awis.amazonaws.com}, :response => fixture("github_rank.txt"))
+      @alexa.response_group = "Rank"
+      @alexa.connect
+      @alexa.parse_xml(@alexa.xml_response)
+      assert_equal 551, @alexa.rank
+    end
+  end
+
+  describe "parsing xml with failure" do
+    it "should raise error when unathorized" do
+      FakeWeb.register_uri(:get, %r{http://awis.amazonaws.com}, :response => fixture("unathorized.txt"))
+      assert_raises StandardError do
+        @alexa.connect
+      end
     end
 
-    it "should raise error" do
+    it "should raise error when forbidden" do
+      FakeWeb.register_uri(:get, %r{http://awis.amazonaws.com}, :response => fixture("forbidden.txt"))
       assert_raises StandardError do
         @alexa.connect
       end
