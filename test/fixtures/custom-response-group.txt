@@ -1,0 +1,22 @@
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Content-Type: text/xml
+Transfer-Encoding: chunked
+Date: Sun, 11 Dec 2011 18:10:13 GMT
+
+<?xml version="1.0"?>
+<aws:UrlInfoResponse xmlns:aws="http://alexa.amazonaws.com/doc/2005-07-11/"><aws:Response xmlns:aws="http://awis.amazonaws.com/doc/2005-07-11"><aws:OperationRequest><aws:RequestId>2bc0f070-540f-8fbf-6804-cd6c9241a039</aws:RequestId></aws:OperationRequest><aws:UrlInfoResult><aws:Alexa>
+  
+  <aws:ContentData>
+    <aws:DataUrl type="canonical">github.com/</aws:DataUrl>
+    <aws:SiteData>
+      <aws:Title>GitHub</aws:Title>
+      <aws:Description>Online project hosting using Git. Includes source-code browser, in-line editing, wikis, and ticketing. Free for public open-source code. Commercial closed source hosting is also available.</aws:Description>
+    </aws:SiteData>
+    <aws:LinksInCount>64563</aws:LinksInCount>
+  </aws:ContentData>
+  <aws:TrafficData>
+    <aws:DataUrl type="canonical">github.com/</aws:DataUrl>
+    <aws:Rank>493</aws:Rank>
+  </aws:TrafficData>
+</aws:Alexa></aws:UrlInfoResult><aws:ResponseStatus xmlns:aws="http://alexa.amazonaws.com/doc/2005-07-11/"><aws:StatusCode>Success</aws:StatusCode></aws:ResponseStatus></aws:Response></aws:UrlInfoResponse>
