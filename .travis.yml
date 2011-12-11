@@ -1,7 +1,9 @@
 notifications:
   disabled: true
 rvm:
+  - ree
   - 1.9.2
+  - 1.9.3
 env:
   - XML_PARSER=rexml
   - XML_PARSER=nokogiri
