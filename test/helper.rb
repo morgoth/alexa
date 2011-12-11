@@ -1,6 +1,5 @@
 require "bundler/setup"
 
-require "ruby-debug"
 require "minitest/autorun"
 require "fakeweb"
 require "mocha"
