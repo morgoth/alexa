@@ -1,9 +1,9 @@
 require "helper"
 
-describe "Alexa::Config" do
+describe Alexa do
   before do
-    Alexa.config.access_key_id = nil
-    Alexa.config.secret_access_key = nil
+    Alexa.access_key_id = nil
+    Alexa.secret_access_key = nil
   end
 
   it "should raise argumment error if access key id is not present" do
