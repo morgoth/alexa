@@ -27,7 +27,7 @@ You can set configuration in block like this:
 
 ``` ruby
 Alexa.configure do |config|
-  config.access_key_id = "key"
+  config.access_key_id     = "key"
   config.secret_access_key = "secret"
 end
 ```
@@ -58,4 +58,4 @@ Support following:
 
 ## Copyright
 
-Copyright (c) 2011 Wojciech Wnętrzak. See LICENSE for details.
+Copyright (c) 2012 Wojciech Wnętrzak. See LICENSE for details.
