@@ -5,8 +5,8 @@ rvm:
   - 1.9.2
   - 1.9.3
 env:
-  - XML_PARSER=rexml
-  - XML_PARSER=nokogiri
-  - XML_PARSER=libxml
+  - ALEXA_XML_PARSER=rexml
+  - ALEXA_XML_PARSER=nokogiri
+  - ALEXA_XML_PARSER=libxml
   # does not work yet
-  # - XML_PARSER=ox
+  # - ALEXA_XML_PARSER=ox
