@@ -15,7 +15,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = Alexa::VERSION
 
-  gem.add_dependency "multi_xml"
+  gem.add_dependency "multi_xml", ">= 0.5.0"
 
   gem.add_development_dependency "mocha"
   gem.add_development_dependency "fakeweb"

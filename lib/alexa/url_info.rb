@@ -29,7 +29,7 @@ class Alexa::UrlInfo
     group = response_group.split(",")
     alexa = xml["UrlInfoResponse"]["Response"]["UrlInfoResult"]["Alexa"]
     @rank = alexa["TrafficData"]["Rank"].to_i if group.include?("Rank") && !alexa["TrafficData"]["Rank"].nil?
-    @data_url = alexa["TrafficData"]["DataUrl"] if group.include?("Rank")
+    @data_url = alexa["TrafficData"]["DataUrl"]["__content__"] if group.include?("Rank")
     @rank_by_country = alexa["TrafficData"]["RankByCountry"]["Country"] if group.include?("RankByCountry") && !alexa["TrafficData"]["RankByCountry"].nil?
     @rank_by_city = alexa["TrafficData"]["RankByCity"]["City"] if group.include?("RankByCity") && !alexa["TrafficData"]["RankByCity"].nil?
     @usage_statistics = alexa["TrafficData"]["UsageStatistics"]["UsageStatistic"] if group.include?("UsageStats") && !alexa["TrafficData"]["UsageStatistics"].nil?
