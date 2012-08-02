@@ -8,7 +8,6 @@ require "time"
 require "multi_xml"
 
 require "alexa/version"
-require "alexa/config"
 require "alexa/url_info"
 
 module Alexa
