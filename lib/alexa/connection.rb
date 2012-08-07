@@ -1,3 +1,10 @@
+require "cgi"
+require "base64"
+require "openssl"
+require "digest/sha1"
+require "net/http"
+require "time"
+
 module Alexa
   class Connection
     attr_reader :secret_access_key, :access_key_id, :params
