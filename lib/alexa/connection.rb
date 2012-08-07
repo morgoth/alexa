@@ -37,7 +37,7 @@ module Alexa
     end
 
     def request
-      Net::HTTP.get_response(url)
+      Net::HTTP.get_response(uri)
     end
 
     def timestamp
@@ -48,7 +48,7 @@ module Alexa
       Base64.encode64(OpenSSL::HMAC.digest(OpenSSL::Digest::Digest.new("sha256"), secret_access_key, sign)).strip
     end
 
-    def url
+    def uri
       URI.parse("http://#{Alexa::API_HOST}/?" + query + "&Signature=" + CGI::escape(signature))
     end
 

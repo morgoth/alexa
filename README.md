@@ -12,7 +12,7 @@ gem install alexa
 
 ``` ruby
 client = Alexa::Client.new(access_key_id: "key", secret_access_key: "secret")
-url_info = client.url_info(host: "site.com")
+url_info = client.url_info(url: "site.com")
 
 returns object with methods:
 :rank, :data_url, :site_title, :site_description, :language_locale, :language_encoding,

@@ -4,14 +4,14 @@ module Alexa::API
 
     DEFAULT_RESPONSE_GROUP = ["adult_content", "contact_info", "keywords", "language", "links_in_count", "owned_domains", "rank", "rank_by_city", "rank_by_country", "related_links", "site_data", "speed", "usage_stats"]
 
-    attr_reader :host, :response_group, :response_body
+    attr_reader :url, :response_group, :response_body
 
     def initialize(credentials)
       @credentials = credentials
     end
 
     def fetch(arguments = {})
-      @host           = arguments[:host] || raise(ArgumentError.new("You must specify host"))
+      @url            = arguments[:url] || raise(ArgumentError.new("You must specify url"))
       @response_group = Array(arguments.fetch(:response_group, DEFAULT_RESPONSE_GROUP))
       @response_body  = Alexa::Connection.new(@credentials).get(params)
       self
@@ -93,7 +93,7 @@ module Alexa::API
       {
         "Action"        => "UrlInfo",
         "ResponseGroup" => response_group_param,
-        "Url"           => host
+        "Url"           => url
       }
     end
 

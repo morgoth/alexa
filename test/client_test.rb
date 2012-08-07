@@ -18,8 +18,8 @@ describe Alexa::Client do
     client = Alexa::Client.new(credentials)
     url_info = stub
     Alexa::API::UrlInfo.expects(:new).with(credentials).returns(url_info)
-    url_info.expects(:fetch).with(:host => "github.com")
+    url_info.expects(:fetch).with(:url => "github.com")
 
-    client.url_info(:host => "github.com")
+    client.url_info(:url => "github.com")
   end
 end
