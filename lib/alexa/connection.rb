@@ -45,7 +45,7 @@ module Alexa
     end
 
     def signature
-      Base64.encode64(OpenSSL::HMAC.digest(OpenSSL::Digest::Digest.new("sha1"), secret_access_key, sign)).strip
+      Base64.encode64(OpenSSL::HMAC.digest(OpenSSL::Digest::Digest.new("sha256"), secret_access_key, sign)).strip
     end
 
     def url
@@ -55,7 +55,7 @@ module Alexa
     def default_params
       {
         "AWSAccessKeyId"   => access_key_id,
-        "SignatureMethod"  => "HmacSHA1",
+        "SignatureMethod"  => "HmacSHA256",
         "SignatureVersion" => "2",
         "Timestamp"        => timestamp,
         "Version"          => Alexa::API_VERSION
