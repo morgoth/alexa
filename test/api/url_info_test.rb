@@ -4,7 +4,7 @@ describe Alexa::API::UrlInfo do
   it "allows to pass single attribute as response_group" do
     stub_request(:get, %r{http://awis.amazonaws.com}).to_return(:body => "ok")
     @url_info = Alexa::API::UrlInfo.new(:access_key_id => "fake", :secret_access_key => "fake")
-    @url_info.fetch(:url => "github.com", response_group: "rank")
+    @url_info.fetch(:url => "github.com", :response_group => "rank")
 
     assert_equal ["rank"], @url_info.response_group
   end
@@ -13,7 +13,7 @@ describe Alexa::API::UrlInfo do
     before do
       stub_request(:get, %r{http://awis.amazonaws.com}).to_return(fixture("custom-response-group.txt"))
       @url_info = Alexa::API::UrlInfo.new(:access_key_id => "fake", :secret_access_key => "fake")
-      @url_info.fetch(:url => "github.com", response_group: ["rank", "links_in_count", "site_data"])
+      @url_info.fetch(:url => "github.com", :response_group => ["rank", "links_in_count", "site_data"])
     end
 
     it "returns rank" do
@@ -104,7 +104,7 @@ describe Alexa::API::UrlInfo do
     it "successfuly connects" do
       stub_request(:get, %r{http://awis.amazonaws.com}).to_return(fixture("github_rank.txt"))
       @url_info = Alexa::API::UrlInfo.new(:access_key_id => "fake", :secret_access_key => "fake")
-      @url_info.fetch(:url => "github.com", response_group: ["rank"])
+      @url_info.fetch(:url => "github.com", :response_group => ["rank"])
 
       assert_equal 551, @url_info.rank
     end

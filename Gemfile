@@ -1,8 +1,8 @@
 source "https://rubygems.org"
 
 gem "minitest", :platform => :ruby_18
+gem "debugger", :platform => :ruby_19
 gem "rake"
-gem "debugger"
 
 # xml parsers
 gem "ox"
