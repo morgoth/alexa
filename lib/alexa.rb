@@ -9,6 +9,7 @@ require "multi_xml"
 
 require "alexa/version"
 require "alexa/utils"
+require "alexa/connection"
 require "alexa/client"
 require "alexa/api/url_info"
 

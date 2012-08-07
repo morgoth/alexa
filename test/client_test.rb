@@ -14,9 +14,10 @@ describe Alexa::Client do
   end
 
   it "fetches UrlInfo results" do
-    client = Alexa::Client.new(:access_key_id => "key", :secret_access_key => "secret")
+    credentials = {:access_key_id => "key", :secret_access_key => "secret"}
+    client = Alexa::Client.new(credentials)
     url_info = stub
-    Alexa::API::UrlInfo.expects(:new).with(client).returns(url_info)
+    Alexa::API::UrlInfo.expects(:new).with(credentials).returns(url_info)
     url_info.expects(:fetch).with(:host => "github.com")
 
     client.url_info(:host => "github.com")

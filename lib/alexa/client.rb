@@ -8,7 +8,7 @@ module Alexa
     end
 
     def url_info(arguments = {})
-      API::UrlInfo.new(self).fetch(arguments)
+      API::UrlInfo.new(:access_key_id => access_key_id, :secret_access_key => secret_access_key).fetch(arguments)
     end
   end
 end
