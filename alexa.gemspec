@@ -18,13 +18,5 @@ Gem::Specification.new do |gem|
   gem.add_dependency "multi_xml", ">= 0.5.0"
 
   gem.add_development_dependency "mocha"
-  gem.add_development_dependency "fakeweb"
-
-  gem.post_install_message = %{
-
-Gem syntax of 0.4 version of this gem will change with backward incompatibilities.
-If you don't want to update your code, please specify in your Gemfile:
-gem "alexa", "~> 0.3.0"
-
-}
+  gem.add_development_dependency "webmock"
 end

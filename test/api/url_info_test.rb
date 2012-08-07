@@ -2,7 +2,7 @@ require "helper"
 
 describe Alexa::API::UrlInfo do
   it "allows to pass single attribute as response_group" do
-    FakeWeb.register_uri(:get, %r{http://awis.amazonaws.com}, body: "ok")
+    stub_request(:get, %r{http://awis.amazonaws.com}).to_return(:body => "ok")
     @url_info = Alexa::API::UrlInfo.new(:access_key_id => "fake", :secret_access_key => "fake")
     @url_info.fetch(host: "github.com", response_group: "rank")
 
@@ -11,7 +11,7 @@ describe Alexa::API::UrlInfo do
 
   describe "parsing xml returned by options rank, links_in_count, site_data" do
     before do
-      FakeWeb.register_uri(:get, %r{http://awis.amazonaws.com}, :response => fixture("custom-response-group.txt"))
+      stub_request(:get, %r{http://awis.amazonaws.com}).to_return(fixture("custom-response-group.txt"))
       @url_info = Alexa::API::UrlInfo.new(:access_key_id => "fake", :secret_access_key => "fake")
       @url_info.fetch(host: "github.com", response_group: ["rank", "links_in_count", "site_data"])
     end
@@ -37,7 +37,7 @@ describe Alexa::API::UrlInfo do
 
   describe "with github.com full response group" do
     before do
-      FakeWeb.register_uri(:get, %r{http://awis.amazonaws.com}, :response => fixture("github_full.txt"))
+      stub_request(:get, %r{http://awis.amazonaws.com}).to_return(fixture("github_full.txt"))
       @url_info = Alexa::API::UrlInfo.new(:access_key_id => "fake", :secret_access_key => "fake")
       @url_info.fetch(host: "github.com")
     end
@@ -102,7 +102,7 @@ describe Alexa::API::UrlInfo do
 
   describe "with github.com rank response group" do
     it "successfuly connects" do
-      FakeWeb.register_uri(:get, %r{http://awis.amazonaws.com}, :response => fixture("github_rank.txt"))
+      stub_request(:get, %r{http://awis.amazonaws.com}).to_return(fixture("github_rank.txt"))
       @url_info = Alexa::API::UrlInfo.new(:access_key_id => "fake", :secret_access_key => "fake")
       @url_info.fetch(host: "github.com", response_group: ["rank"])
 
@@ -112,7 +112,7 @@ describe Alexa::API::UrlInfo do
 
   describe "parsing xml with failure" do
     it "raises error when unathorized" do
-      FakeWeb.register_uri(:get, %r{http://awis.amazonaws.com}, :response => fixture("unathorized.txt"))
+      stub_request(:get, %r{http://awis.amazonaws.com}).to_return(fixture("unathorized.txt"))
       @url_info = Alexa::API::UrlInfo.new(:access_key_id => "wrong", :secret_access_key => "wrong")
 
 
@@ -122,7 +122,7 @@ describe Alexa::API::UrlInfo do
     end
 
     it "raises error when forbidden" do
-      FakeWeb.register_uri(:get, %r{http://awis.amazonaws.com}, :response => fixture("forbidden.txt"))
+      stub_request(:get, %r{http://awis.amazonaws.com}).to_return(fixture("forbidden.txt"))
       @url_info = Alexa::API::UrlInfo.new(:access_key_id => "wrong", :secret_access_key => "wrong")
 
       assert_raises StandardError do

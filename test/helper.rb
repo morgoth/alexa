@@ -1,19 +1,19 @@
 require "bundler/setup"
 
 require "minitest/autorun"
-require "fakeweb"
+require "webmock/minitest"
 require "mocha"
 
 require "alexa"
 
-xml_parser = ENV["XML_PARSER"] || "rexml"
+xml_parser = ENV["XML_PARSER"] || "libxml"
 
 require xml_parser if ["nokogiri", "libxml", "ox"].include?(xml_parser)
 MultiXml.parser = xml_parser
 
 class MiniTest::Unit::TestCase
   def setup
-    FakeWeb.allow_net_connect = false
+    WebMock.disable_net_connect!
   end
 
   # Recording response is as simple as writing in terminal:
