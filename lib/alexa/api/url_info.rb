@@ -2,8 +2,6 @@ module Alexa::API
   class UrlInfo
     include Alexa::Utils
 
-    API_VERSION = "2005-07-11"
-    HOST = "awis.amazonaws.com"
     DEFAULT_RESPONSE_GROUP = "Rank,ContactInfo,AdultContent,Speed,Language,Keywords,OwnedDomains,LinksInCount,SiteData,RelatedLinks,RankByCountry,RankByCity,UsageStats"
 
     attr_reader :client, :host, :response_group, :response_body
@@ -92,7 +90,7 @@ module Alexa::API
     private
 
     def request
-      handle_response Net::HTTP.start(url.host) { |http| http.get url.request_uri }
+      handle_response Net::HTTP.get_response(url)
     end
 
     def parsed_body
@@ -133,7 +131,7 @@ module Alexa::API
     end
 
     def url
-      URI.parse("http://#{HOST}/?" + query + "&Signature=" + CGI::escape(signature))
+      URI.parse("http://#{Alexa::API_HOST}/?" + query + "&Signature=" + CGI::escape(signature))
     end
 
     def params_without_signature
@@ -145,12 +143,12 @@ module Alexa::API
         "SignatureVersion" => "2",
         "Timestamp"        => timestamp,
         "Url"              => host,
-        "Version"          => API_VERSION
+        "Version"          => Alexa::API_VERSION
       }
     end
 
     def sign
-      "GET\n" + HOST + "\n/\n" + query
+      "GET\n" + Alexa::API_HOST + "\n/\n" + query
     end
 
     def query
