@@ -1,13 +1,12 @@
 module Alexa
   module Utils
-    # TODO: simplify
     def safe_retrieve(hash, *keys)
-      if hash.kind_of?(Hash) && hash.has_key?(keys.first) && keys.size > 1
-        Alexa::Utils.safe_retrieve(hash[keys.first], *keys[1..-1])
-      elsif hash.kind_of?(Hash) && hash.has_key?(keys.first) && keys.size == 1
+      return if !hash.kind_of?(Hash) || !hash.has_key?(keys.first)
+
+      if keys.size == 1
         hash[keys.first]
-      else
-        nil
+      elsif keys.size > 1
+        Alexa::Utils.safe_retrieve(hash[keys.first], *keys[1..-1])
       end
     end
 
