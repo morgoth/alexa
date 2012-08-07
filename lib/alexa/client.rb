@@ -7,11 +7,8 @@ module Alexa
       @secret_access_key = configuration[:secret_access_key] || raise(ArgumentError.new("You must specify secret_access_key"))
     end
 
-    def url_info(options)
-      url_info = Alexa::UrlInfo.new(options)
-      xml = url_info.connect
-      url_info.parse_xml(xml)
-      url_info
+    def url_info(arguments = {})
+      API::UrlInfo.new(self).fetch(arguments)
     end
   end
 end

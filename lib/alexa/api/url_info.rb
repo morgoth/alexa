@@ -92,13 +92,11 @@ module Alexa::API
     private
 
     def request
-      Net::HTTP.start(url.host) do |http|
-        http.get url.request_uri
-      end
+      handle_response Net::HTTP.start(url.host) { |http| http.get url.request_uri }
     end
 
     def parsed_body
-      MultiXml.parse(response_body)
+      @parsed_body ||= MultiXml.parse(response_body)
     end
 
     def timestamp
