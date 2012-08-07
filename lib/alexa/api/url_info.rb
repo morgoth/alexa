@@ -98,7 +98,7 @@ module Alexa::API
     end
 
     def response_group_param
-      response_group.sort.map { |group| camelize(group) }.join
+      response_group.sort.map { |group| camelize(group) }.join(",")
     end
 
     def parsed_body
