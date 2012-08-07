@@ -2,11 +2,10 @@ notifications:
   disabled: true
 rvm:
   - ree
-  - 1.9.2
   - 1.9.3
 env:
-  - ALEXA_XML_PARSER=rexml
-  - ALEXA_XML_PARSER=nokogiri
-  - ALEXA_XML_PARSER=libxml
+  - XML_PARSER=rexml
+  - XML_PARSER=nokogiri
+  - XML_PARSER=libxml
   # does not work yet
   # - ALEXA_XML_PARSER=ox

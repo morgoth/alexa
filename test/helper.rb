@@ -6,10 +6,10 @@ require "mocha"
 
 require "alexa"
 
-alexa_xml_parser = ENV["ALEXA_XML_PARSER"] || "rexml"
+xml_parser = ENV["XML_PARSER"] || "rexml"
 
-require alexa_xml_parser if ["nokogiri", "libxml", "ox"].include?(alexa_xml_parser)
-MultiXml.parser = alexa_xml_parser
+require xml_parser if ["nokogiri", "libxml", "ox"].include?(xml_parser)
+MultiXml.parser = xml_parser
 
 class MiniTest::Unit::TestCase
   def setup
