@@ -20,7 +20,7 @@ returns object with methods:
 :rank_by_country, :rank_by_city, :usage_statistics
 ```
 
-NOTE: You can specify option `response_group: "Rank,ContactInfo"` or any other valid group.
+NOTE: You can specify option `response_group: ["rank", "contact_info"]` or any other valid group.
 See: [Docs](http://docs.amazonwebservices.com/AlexaWebInfoService/latest/)
 Default response group takes all the available options.
 

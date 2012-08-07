@@ -1,12 +1,21 @@
 require "helper"
 
 describe Alexa::API::UrlInfo do
-  describe "parsing xml returned by options Rank,LinksInCount,SiteData" do
+  it "allows to pass single attribute as response_group" do
+    FakeWeb.register_uri(:get, %r{http://awis.amazonaws.com}, body: "ok")
+    client = Alexa::Client.new(access_key_id: "fake", secret_access_key: "fake")
+    @url_info = Alexa::API::UrlInfo.new(client)
+    @url_info.fetch(host: "github.com", response_group: "rank")
+
+    assert_equal ["rank"], @url_info.response_group
+  end
+
+  describe "parsing xml returned by options rank, links_in_count, site_data" do
     before do
       FakeWeb.register_uri(:get, %r{http://awis.amazonaws.com}, :response => fixture("custom-response-group.txt"))
       client = Alexa::Client.new(access_key_id: "fake", secret_access_key: "fake")
       @url_info = Alexa::API::UrlInfo.new(client)
-      @url_info.fetch(host: "github.com", response_group: "Rank,LinksInCount,SiteData")
+      @url_info.fetch(host: "github.com", response_group: ["rank", "links_in_count", "site_data"])
     end
 
     it "returns rank" do
@@ -99,7 +108,7 @@ describe Alexa::API::UrlInfo do
       FakeWeb.register_uri(:get, %r{http://awis.amazonaws.com}, :response => fixture("github_rank.txt"))
       client = Alexa::Client.new(access_key_id: "fake", secret_access_key: "fake")
       @url_info = Alexa::API::UrlInfo.new(client)
-      @url_info.fetch(host: "github.com", response_group: "Rank")
+      @url_info.fetch(host: "github.com", response_group: ["rank"])
 
       assert_equal 551, @url_info.rank
     end

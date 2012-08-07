@@ -11,6 +11,10 @@ module Alexa
       end
     end
 
-    module_function :safe_retrieve
+    def camelize(string)
+      string.split("_").map { |w| w.capitalize }.join
+    end
+
+    module_function :safe_retrieve, :camelize
   end
 end

@@ -2,7 +2,7 @@ module Alexa::API
   class UrlInfo
     include Alexa::Utils
 
-    DEFAULT_RESPONSE_GROUP = "Rank,ContactInfo,AdultContent,Speed,Language,Keywords,OwnedDomains,LinksInCount,SiteData,RelatedLinks,RankByCountry,RankByCity,UsageStats"
+    DEFAULT_RESPONSE_GROUP = ["adult_content", "contact_info", "keywords", "language", "links_in_count", "owned_domains", "rank", "rank_by_city", "rank_by_country", "related_links", "site_data", "speed", "usage_stats"]
 
     attr_reader :client, :host, :response_group, :response_body
 
@@ -12,7 +12,7 @@ module Alexa::API
 
     def fetch(arguments = {})
       @host           = arguments[:host] || raise(ArgumentError.new("You must specify host"))
-      @response_group = arguments.fetch(:response_group, DEFAULT_RESPONSE_GROUP)
+      @response_group = Array(arguments.fetch(:response_group, DEFAULT_RESPONSE_GROUP))
       @response_body  = encode(request.body)
       self
     end
@@ -134,11 +134,15 @@ module Alexa::API
       URI.parse("http://#{Alexa::API_HOST}/?" + query + "&Signature=" + CGI::escape(signature))
     end
 
+    def response_group_param
+      response_group.sort.map { |group| camelize(group) }.join
+    end
+
     def params_without_signature
       {
         "Action"           => "UrlInfo",
         "AWSAccessKeyId"   => client.access_key_id,
-        "ResponseGroup"    => response_group,
+        "ResponseGroup"    => response_group_param,
         "SignatureMethod"  => "HmacSHA1",
         "SignatureVersion" => "2",
         "Timestamp"        => timestamp,
