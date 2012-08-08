@@ -11,7 +11,7 @@ describe Alexa::API::UrlInfo do
 
   describe "parsing xml returned by options rank, links_in_count, site_data" do
     before do
-      stub_request(:get, %r{http://awis.amazonaws.com}).to_return(fixture("custom-response-group.txt"))
+      stub_request(:get, %r{http://awis.amazonaws.com}).to_return(fixture("url_info/custom-response-group.txt"))
       @url_info = Alexa::API::UrlInfo.new(:access_key_id => "fake", :secret_access_key => "fake")
       @url_info.fetch(:url => "github.com", :response_group => ["rank", "links_in_count", "site_data"])
     end
@@ -37,7 +37,7 @@ describe Alexa::API::UrlInfo do
 
   describe "with github.com full response group" do
     before do
-      stub_request(:get, %r{http://awis.amazonaws.com}).to_return(fixture("github_full.txt"))
+      stub_request(:get, %r{http://awis.amazonaws.com}).to_return(fixture("url_info/github_full.txt"))
       @url_info = Alexa::API::UrlInfo.new(:access_key_id => "fake", :secret_access_key => "fake")
       @url_info.fetch(:url => "github.com")
     end
@@ -102,32 +102,11 @@ describe Alexa::API::UrlInfo do
 
   describe "with github.com rank response group" do
     it "successfuly connects" do
-      stub_request(:get, %r{http://awis.amazonaws.com}).to_return(fixture("github_rank.txt"))
+      stub_request(:get, %r{http://awis.amazonaws.com}).to_return(fixture("url_info/github_rank.txt"))
       @url_info = Alexa::API::UrlInfo.new(:access_key_id => "fake", :secret_access_key => "fake")
       @url_info.fetch(:url => "github.com", :response_group => ["rank"])
 
       assert_equal 551, @url_info.rank
-    end
-  end
-
-  describe "parsing xml with failure" do
-    it "raises error when unathorized" do
-      stub_request(:get, %r{http://awis.amazonaws.com}).to_return(fixture("unathorized.txt"))
-      @url_info = Alexa::API::UrlInfo.new(:access_key_id => "wrong", :secret_access_key => "wrong")
-
-
-      assert_raises StandardError do
-        @url_info.fetch(:url => "github.com")
-      end
-    end
-
-    it "raises error when forbidden" do
-      stub_request(:get, %r{http://awis.amazonaws.com}).to_return(fixture("forbidden.txt"))
-      @url_info = Alexa::API::UrlInfo.new(:access_key_id => "wrong", :secret_access_key => "wrong")
-
-      assert_raises StandardError do
-        @url_info.fetch(:url => "github.com")
-      end
     end
   end
 end

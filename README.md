@@ -10,6 +10,8 @@ gem install alexa
 
 ## Usage
 
+### Url Info
+
 ``` ruby
 client = Alexa::Client.new(access_key_id: "key", secret_access_key: "secret")
 url_info = client.url_info(url: "site.com")
@@ -24,7 +26,23 @@ NOTE: You can specify option `response_group: ["rank", "contact_info"]` or any o
 See: [Docs](http://docs.amazonwebservices.com/AlexaWebInfoService/latest/)
 Default response group takes all the available options.
 
-alexa is using `multi_xml` to parse XML documents. Tested with:
+### Sites Linking In
+
+``` ruby
+client = Alexa::Client.new(access_key_id: "key", secret_access_key: "secret")
+sites_linking_in = client.sites_linking_in(url: "site.com")
+
+# returns object with `sites` method
+```
+
+NOTE: You can specify options:
+
+* count (how many results to retrieve - default to max value 20)
+* start (offset of results - default to 0)
+
+## Caveats
+
+Alexa is using `multi_xml` to parse XML documents. Tested with:
 
 * rexml
 * nokogiri
@@ -39,14 +57,14 @@ Support following:
 * Traffic History
 * Category Browse
 * Category Listings
-* Sites Linking In
 
 ## Contributors
 
 * [rmoriz](https://github.com/rmoriz)
 
 ## Continuous Integration
-[![Build Status](https://secure.travis-ci.org/morgoth/alexa.png)](http://travis-ci.org/morgoth/alexa)
+
+[![Build Status](https://secure.travis-ci.org/morgoth/alexa.png?branch=master)](http://travis-ci.org/morgoth/alexa)
 
 ## Copyright
 

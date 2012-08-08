@@ -67,7 +67,7 @@ module Alexa
     end
 
     def query
-      default_params.merge(params).map { |key, value| "#{key}=#{CGI::escape(value)}" }.sort.join("&")
+      default_params.merge(params).map { |key, value| "#{key}=#{CGI::escape(value.to_s)}" }.sort.join("&")
     end
 
     def encode(string)
