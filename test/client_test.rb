@@ -52,4 +52,14 @@ describe Alexa::Client do
 
     client.category_browse(:path => "Top/Games/Card_Games")
   end
+
+  it "fetches CategoryListings results" do
+    credentials = {:access_key_id => "key", :secret_access_key => "secret"}
+    client = Alexa::Client.new(credentials)
+    category_listings = stub
+    Alexa::API::CategoryListings.expects(:new).with(credentials).returns(category_listings)
+    category_listings.expects(:fetch).with(:path => "Top/Games/Card_Games")
+
+    client.category_listings(:path => "Top/Games/Card_Games")
+  end
 end

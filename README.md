@@ -72,6 +72,27 @@ You can specify options:
 * response_group (any of: categories, related_categories, language_categories, letter_bars)
 * descriptions (include descriptions - boolean, true by default)
 
+### Category Listings
+
+``` ruby
+client = Alexa::Client.new(access_key_id: "key", secret_access_key: "secret")
+category_listings = client.category_listings(path: "Top/Games/Card_Games")
+
+# returns object with `recursive_count`, `listings` methods.
+```
+
+NOTE:
+
+You can find valid paths on [dmoz](http://www.dmoz.org/) site
+
+You can specify options:
+
+* sort_by (sort results by one of: popularity, title, average_review)
+* recursive (results for the given category only, or including subcategories - boolean, true by default)
+* count (how many results to retrieve - default to max value 20)
+* start (offset of results - default to 0)
+* descriptions (include descriptions - boolean, true by default)
+
 ## Caveats
 
 Alexa is using `multi_xml` to parse XML documents. Tested with:
@@ -80,13 +101,7 @@ Alexa is using `multi_xml` to parse XML documents. Tested with:
 * nokogiri
 * libxml
 
-Currently alexa wont work with `ox` gem
-
-## TODO
-
-Support following:
-
-* Category Listings
+Currently alexa will not work with `ox` gem
 
 ## Contributors
 

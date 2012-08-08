@@ -11,6 +11,10 @@ module Alexa
       API::CategoryBrowse.new(:access_key_id => access_key_id, :secret_access_key => secret_access_key).fetch(arguments)
     end
 
+    def category_listings(arguments = {})
+      API::CategoryListings.new(:access_key_id => access_key_id, :secret_access_key => secret_access_key).fetch(arguments)
+    end
+
     def sites_linking_in(arguments = {})
       API::SitesLinkingIn.new(:access_key_id => access_key_id, :secret_access_key => secret_access_key).fetch(arguments)
     end
