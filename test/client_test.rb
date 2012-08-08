@@ -42,4 +42,14 @@ describe Alexa::Client do
 
     client.traffic_history(:url => "github.com", :range => 15)
   end
+
+  it "fetches CategoryBrowse results" do
+    credentials = {:access_key_id => "key", :secret_access_key => "secret"}
+    client = Alexa::Client.new(credentials)
+    category_browse = stub
+    Alexa::API::CategoryBrowse.expects(:new).with(credentials).returns(category_browse)
+    category_browse.expects(:fetch).with(:path => "Top/Games/Card_Games")
+
+    client.category_browse(:path => "Top/Games/Card_Games")
+  end
 end

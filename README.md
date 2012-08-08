@@ -54,6 +54,24 @@ NOTE: You can specify options:
 * range (how many days to retrieve - default to max value 31)
 * start (start date - default to range days ago)
 
+### Category Browse
+
+``` ruby
+client = Alexa::Client.new(access_key_id: "key", secret_access_key: "secret")
+category_browse = client.category_browse(path: "Top/Games/Card_Games")
+
+# returns object with `categories`, `language_categories`, `related_categories`, `letter_bars` methods.
+```
+
+NOTE:
+
+You can find valid paths on [dmoz](http://www.dmoz.org/) site
+
+You can specify options:
+
+* response_group (any of: categories, related_categories, language_categories, letter_bars)
+* descriptions (include descriptions - boolean, true by default)
+
 ## Caveats
 
 Alexa is using `multi_xml` to parse XML documents. Tested with:
@@ -68,8 +86,6 @@ Currently alexa wont work with `ox` gem
 
 Support following:
 
-* Traffic History
-* Category Browse
 * Category Listings
 
 ## Contributors
