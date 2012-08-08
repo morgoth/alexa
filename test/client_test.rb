@@ -32,4 +32,14 @@ describe Alexa::Client do
 
     client.sites_linking_in(:url => "github.com", :count => 15, :start => 2)
   end
+
+  it "fetches TrafficHistory results" do
+    credentials = {:access_key_id => "key", :secret_access_key => "secret"}
+    client = Alexa::Client.new(credentials)
+    traffic_history = stub
+    Alexa::API::TrafficHistory.expects(:new).with(credentials).returns(traffic_history)
+    traffic_history.expects(:fetch).with(:url => "github.com", :range => 15)
+
+    client.traffic_history(:url => "github.com", :range => 15)
+  end
 end

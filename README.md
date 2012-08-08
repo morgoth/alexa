@@ -40,6 +40,20 @@ NOTE: You can specify options:
 * count (how many results to retrieve - default to max value 20)
 * start (offset of results - default to 0)
 
+### Traffic History
+
+``` ruby
+client = Alexa::Client.new(access_key_id: "key", secret_access_key: "secret")
+traffic_history = client.traffic_history(url: "site.com")
+
+# returns object with `data` method
+```
+
+NOTE: You can specify options:
+
+* range (how many days to retrieve - default to max value 31)
+* start (start date - default to range days ago)
+
 ## Caveats
 
 Alexa is using `multi_xml` to parse XML documents. Tested with:

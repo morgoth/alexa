@@ -14,5 +14,9 @@ module Alexa
     def sites_linking_in(arguments = {})
       API::SitesLinkingIn.new(:access_key_id => access_key_id, :secret_access_key => secret_access_key).fetch(arguments)
     end
+
+    def traffic_history(arguments = {})
+      API::TrafficHistory.new(:access_key_id => access_key_id, :secret_access_key => secret_access_key).fetch(arguments)
+    end
   end
 end
