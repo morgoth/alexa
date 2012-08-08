@@ -25,14 +25,14 @@ module Alexa
         response
       when 300...600
         if response.body.nil?
-          raise StandardError.new(response)
+          raise ResponseError.new(nil, response)
         else
           xml = MultiXml.parse(response.body)
           message = xml["Response"]["Errors"]["Error"]["Message"]
-          raise StandardError.new(message)
+          raise ResponseError.new(message, response)
         end
       else
-        raise StandardError.new("Unknown code: #{respnse.code}")
+        raise ResponseError.new("Unknown code: #{respnse.code}", response)
       end
     end
 
