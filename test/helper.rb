@@ -1,5 +1,3 @@
-require "bundler/setup"
-
 require "minitest/autorun"
 require "webmock/minitest"
 require "mocha"
@@ -17,7 +15,7 @@ class MiniTest::Unit::TestCase
   end
 
   # Recording response is as simple as writing in terminal:
-  # curl -is "http://awis.amazonaws.com/?Action=UrlInfo&AWSAccessKeyId=fake" -X GET > response.txt
+  # curl -is -X GET "http://awis.amazonaws.com/?Action=UrlInfo&AWSAccessKeyId=fake" > response.txt
   def fixture(filename)
     File.read(File.join("test", "fixtures", filename))
   end

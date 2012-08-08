@@ -7,11 +7,16 @@ require "time"
 
 module Alexa
   class Connection
-    attr_accessor :secret_access_key, :access_key_id, :params
+    attr_accessor :secret_access_key, :access_key_id
+    attr_writer :params
 
     def initialize(credentials = {})
       self.secret_access_key = credentials.fetch(:secret_access_key)
       self.access_key_id     = credentials.fetch(:access_key_id)
+    end
+
+    def params
+      @params ||= {}
     end
 
     def get(params = {})

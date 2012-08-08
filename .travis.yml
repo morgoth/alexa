@@ -8,4 +8,4 @@ env:
   - XML_PARSER=nokogiri
   - XML_PARSER=libxml
   # does not work yet
-  # - ALEXA_XML_PARSER=ox
+  # - XML_PARSER=ox
