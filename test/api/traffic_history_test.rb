@@ -12,13 +12,13 @@ describe Alexa::API::TrafficHistory do
 
   describe "parsing xml" do
     before do
-      stub_request(:get, %r{http://awis.amazonaws.com}).to_return(fixture("traffic_history/alexa_example.txt"))
+      stub_request(:get, %r{http://awis.amazonaws.com}).to_return(fixture("traffic_history/github.txt"))
       @traffic_history = Alexa::API::TrafficHistory.new(:access_key_id => "fake", :secret_access_key => "fake")
-      @traffic_history.fetch(:url => "amazon.com", :start => "20050101", :range => 31)
+      @traffic_history.fetch(:url => "amazon.com")
     end
 
     it "returns data" do
-      # assert_equal 1, @traffic_history.data.size
+      assert_equal 28, @traffic_history.data.size
     end
   end
 end

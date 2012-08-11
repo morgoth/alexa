@@ -25,7 +25,7 @@ Returns object that contains methods:
 * site_description
 * language_locale
 * language_encoding
-* :links_in_count
+* links_in_count
 * keywords
 * related_links
 * speed_median_load_time
@@ -37,9 +37,9 @@ Returns object that contains methods:
 You can specify options:
 
 * url - address to be measured
-* response_group - which data to include in response (i.e. ["rank", "contact_info"]),
-  defaults to all available
-  See: [Docs](http://docs.amazonwebservices.com/AlexaWebInfoService/latest/) for valid groups.
+* response_group - which data to include in response (i.e. ["rank", "contact_info"]) - defaults to all available
+
+See: [Docs](http://docs.amazonwebservices.com/AlexaWebInfoService/latest/) for valid groups.
 
 ### Sites Linking In
 
