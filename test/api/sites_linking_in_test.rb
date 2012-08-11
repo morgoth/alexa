@@ -29,5 +29,9 @@ describe Alexa::API::SitesLinkingIn do
     it "has success status code" do
       assert_equal "Success", @sites_linking_in.status_code
     end
+
+    it "has request id" do
+      assert_equal "abb553a3-035f-8d12-f353-40532a087b52", @sites_linking_in.request_id
+    end
   end
 end

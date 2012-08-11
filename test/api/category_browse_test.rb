@@ -33,5 +33,9 @@ describe Alexa::API::CategoryBrowse do
     it "has success status code" do
       assert_equal "Success", @category_browse.status_code
     end
+
+    it "has request id" do
+      assert_equal "c8bec6fe-84f3-9a8e-7444-47f86c64d74b", @category_browse.request_id
+    end
   end
 end

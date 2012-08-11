@@ -42,6 +42,10 @@ describe Alexa::API::TrafficHistory do
     it "has success status code" do
       assert_equal "Success", @traffic_history.status_code
     end
+
+    it "has request id" do
+      assert_equal "617614fc-46a3-a105-a7ab-80a17f117bcf", @traffic_history.request_id
+    end
   end
 
   it "has error status code" do

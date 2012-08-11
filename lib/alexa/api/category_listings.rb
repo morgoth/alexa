@@ -38,7 +38,11 @@ module Alexa
       end
 
       def status_code
-        safe_retrieve(parsed_body, "CategoryListingsResponse", "Response", "ResponseStatus", "StatusCode")
+        @status_code ||= safe_retrieve(parsed_body, "CategoryListingsResponse", "Response", "ResponseStatus", "StatusCode")
+      end
+
+      def request_id
+        @request_id ||= safe_retrieve(parsed_body, "CategoryListingsResponse", "Response", "OperationRequest", "RequestId")
       end
 
       private

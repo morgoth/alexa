@@ -10,6 +10,8 @@ gem install alexa
 
 ## Usage
 
+All success response objects contain `response_id` method.
+
 ### Url Info
 
 ``` ruby

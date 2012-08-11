@@ -29,5 +29,9 @@ describe Alexa::API::CategoryListings do
     it "has success status code" do
       assert_equal "Success", @category_listings.status_code
     end
+
+    it "has request id" do
+      assert_equal "a069b6cd-309f-df52-88be-1bd88ab45b7e", @category_listings.request_id
+    end
   end
 end

@@ -39,6 +39,10 @@ describe Alexa::API::UrlInfo do
 
       assert_equal expected, @url_info.site_description
     end
+
+    it "has request id" do
+      assert_equal "2bc0f070-540f-8fbf-6804-cd6c9241a039", @url_info.request_id
+    end
   end
 
   describe "with github.com full response group" do
