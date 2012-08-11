@@ -15,83 +15,106 @@ gem install alexa
 ``` ruby
 client = Alexa::Client.new(access_key_id: "key", secret_access_key: "secret")
 url_info = client.url_info(url: "site.com")
-
-returns object with methods:
-:rank, :data_url, :site_title, :site_description, :language_locale, :language_encoding,
-:links_in_count, :keywords, :related_links, :speed_median_load_time, :speed_percentile,
-:rank_by_country, :rank_by_city, :usage_statistics
 ```
 
-NOTE: You can specify option `response_group: ["rank", "contact_info"]` or any other valid group.
-See: [Docs](http://docs.amazonwebservices.com/AlexaWebInfoService/latest/)
-Default response group takes all the available options.
+Returns object that contains methods:
+
+* rank
+* data_url
+* site_title
+* site_description
+* language_locale
+* language_encoding
+* :links_in_count
+* keywords
+* related_links
+* speed_median_load_time
+* speed_percentile
+* rank_by_country
+* rank_by_city
+* usage_statistics
+
+You can specify options:
+
+* url - address to be measured
+* response_group - which data to include in response (i.e. ["rank", "contact_info"]),
+  defaults to all available
+  See: [Docs](http://docs.amazonwebservices.com/AlexaWebInfoService/latest/) for valid groups.
 
 ### Sites Linking In
 
 ``` ruby
 client = Alexa::Client.new(access_key_id: "key", secret_access_key: "secret")
 sites_linking_in = client.sites_linking_in(url: "site.com")
-
-# returns object with `sites` method
 ```
 
-NOTE: You can specify options:
+Returns object that contains method:
 
-* count (how many results to retrieve - default to max value 20)
-* start (offset of results - default to 0)
+* sites
+
+You can specify options:
+
+* url - address to be measured
+* count - how many results to retrieve - defaults to max value that is 20
+* start - offset of results - defaults to 0
 
 ### Traffic History
 
 ``` ruby
 client = Alexa::Client.new(access_key_id: "key", secret_access_key: "secret")
 traffic_history = client.traffic_history(url: "site.com")
-
-# returns object with `data` method
 ```
 
-NOTE: You can specify options:
+Returns object that contains method:
 
-* range (how many days to retrieve - default to max value 31)
-* start (start date - default to range days ago)
+* data
+
+You can specify options:
+
+* url - address to be measured
+* range - how many days to retrieve - defaults to max value 31
+* start - start date (i.e. "20120120", 4.days.ago) - defaults to range number days ago
 
 ### Category Browse
 
 ``` ruby
 client = Alexa::Client.new(access_key_id: "key", secret_access_key: "secret")
 category_browse = client.category_browse(path: "Top/Games/Card_Games")
-
-# returns object with `categories`, `language_categories`, `related_categories`, `letter_bars` methods.
 ```
 
-NOTE:
+Returns object that contains methods:
 
-You can find valid paths on [dmoz](http://www.dmoz.org/) site
+* categories
+* language_categories
+* related_categories
+* letter_bars
 
 You can specify options:
 
-* response_group (any of: categories, related_categories, language_categories, letter_bars)
-* descriptions (include descriptions - boolean, true by default)
+* path - category to be measured (i.e. "Top/Games/Card_Games") - valid paths can be found on [dmoz](http://www.dmoz.org/)
+* response_group - any of: categories, related_categories, language_categories, letter_bars - defaults to all
+* descriptions - should response include descriptions (i.e. false) - defaults to true
 
 ### Category Listings
 
 ``` ruby
 client = Alexa::Client.new(access_key_id: "key", secret_access_key: "secret")
 category_listings = client.category_listings(path: "Top/Games/Card_Games")
-
-# returns object with `recursive_count`, `listings` methods.
 ```
 
-NOTE:
+Returns object that contains methods:
 
-You can find valid paths on [dmoz](http://www.dmoz.org/) site
+* recursive_count
+* listings
 
 You can specify options:
 
-* sort_by (sort results by one of: popularity, title, average_review)
-* recursive (results for the given category only, or including subcategories - boolean, true by default)
-* count (how many results to retrieve - default to max value 20)
-* start (offset of results - default to 0)
-* descriptions (include descriptions - boolean, true by default)
+* path - category to be measured (i.e. "Top/Games/Card_Games") - valid paths can be found on [dmoz](http://www.dmoz.org/)
+* sort_by - sort results by one of: popularity, title, average_review - defaults to popularity
+* recursive - should result include subcategories (i.e. false)- defaults to true
+* count - how many results to retrieve - defaults to max value, that is 20
+* start - offset of results - defaults to 0
+* descriptions - should response include descriptions (i.e. false) - defaults to true
 
 ## Caveats
 
