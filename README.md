@@ -67,6 +67,9 @@ traffic_history = client.traffic_history(url: "site.com")
 
 Returns object that contains method:
 
+* site
+* range
+* start
 * data
 
 You can specify options:
@@ -104,6 +107,7 @@ category_listings = client.category_listings(path: "Top/Games/Card_Games")
 
 Returns object that contains methods:
 
+* count
 * recursive_count
 * listings
 

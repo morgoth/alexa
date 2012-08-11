@@ -18,6 +18,10 @@ describe Alexa::API::CategoryListings do
       assert_equal 1051, @category_listings.recursive_count
     end
 
+    it "returns count" do
+      assert_equal 1, @category_listings.count
+    end
+
     it "returns listings" do
       assert_equal 20, @category_listings.listings.size
     end

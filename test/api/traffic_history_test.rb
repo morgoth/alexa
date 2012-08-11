@@ -20,7 +20,19 @@ describe Alexa::API::TrafficHistory do
     before do
       stub_request(:get, %r{http://awis.amazonaws.com}).to_return(fixture("traffic_history/github.txt"))
       @traffic_history = Alexa::API::TrafficHistory.new(:access_key_id => "fake", :secret_access_key => "fake")
-      @traffic_history.fetch(:url => "amazon.com")
+      @traffic_history.fetch(:url => "github.com")
+    end
+
+    it "returns site" do
+      assert_equal "github.com", @traffic_history.site
+    end
+
+    it "returns range" do
+      assert_equal 28, @traffic_history.range
+    end
+
+    it "returns start" do
+      assert_equal "2012-07-11", @traffic_history.start
     end
 
     it "returns data" do

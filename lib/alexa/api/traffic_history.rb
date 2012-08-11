@@ -16,6 +16,21 @@ module Alexa
 
       # Response attributes
 
+      def site
+        @site ||= safe_retrieve(parsed_body, "TrafficHistoryResponse", "Response", "TrafficHistoryResult", "Alexa", "TrafficHistory", "Site")
+      end
+
+      def start
+        @start ||= safe_retrieve(parsed_body, "TrafficHistoryResponse", "Response", "TrafficHistoryResult", "Alexa", "TrafficHistory", "Start")
+      end
+
+      def range
+        return @range if defined?(@range)
+        if range = safe_retrieve(parsed_body, "TrafficHistoryResponse", "Response", "TrafficHistoryResult", "Alexa", "TrafficHistory", "Range")
+          @range = range.to_i
+        end
+      end
+
       def data
         @data ||= safe_retrieve(parsed_body, "TrafficHistoryResponse", "Response", "TrafficHistoryResult", "Alexa", "TrafficHistory", "HistoricalData", "Data")
       end

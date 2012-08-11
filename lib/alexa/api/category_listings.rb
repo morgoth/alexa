@@ -19,6 +19,13 @@ module Alexa
 
       # Response attributes
 
+      def count
+        return @count if defined?(@count)
+        if count = safe_retrieve(parsed_body, "CategoryListingsResponse", "Response", "CategoryListingsResult", "Alexa", "CategoryListings", "Count")
+          @count = count.to_i
+        end
+      end
+
       def recursive_count
         return @recursive_count if defined?(@recursive_count)
         if recursive_count = safe_retrieve(parsed_body, "CategoryListingsResponse", "Response", "CategoryListingsResult", "Alexa", "CategoryListings", "RecursiveCount")
