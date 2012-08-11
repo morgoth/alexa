@@ -4,20 +4,27 @@ module Alexa::API
 
     DEFAULT_RESPONSE_GROUP = ["adult_content", "contact_info", "keywords", "language", "links_in_count", "owned_domains", "rank", "rank_by_city", "rank_by_country", "related_links", "site_data", "speed", "usage_stats"]
 
-    attr_reader :url, :response_group, :response_body
+    attr_reader :arguments, :response_body
 
     def initialize(credentials)
       @credentials = credentials
     end
 
     def fetch(arguments = {})
-      @url            = arguments[:url] || raise(ArgumentError.new("You must specify url"))
-      @response_group = Array(arguments.fetch(:response_group, DEFAULT_RESPONSE_GROUP))
+      raise ArgumentError, "You must specify url" unless arguments.has_key?(:url)
+      @arguments = arguments
+
+      @arguments[:response_group] = Array(arguments.fetch(:response_group, DEFAULT_RESPONSE_GROUP))
+
       @response_body  = Alexa::Connection.new(@credentials).get(params)
       self
     end
 
-    # attributes
+    def parsed_body
+      @parsed_body ||= MultiXml.parse(response_body)
+    end
+
+    # Response attributes
 
     def rank
       return @rank if defined?(@rank)
@@ -93,16 +100,12 @@ module Alexa::API
       {
         "Action"        => "UrlInfo",
         "ResponseGroup" => response_group_param,
-        "Url"           => url
+        "Url"           => arguments[:url]
       }
     end
 
     def response_group_param
-      response_group.sort.map { |group| camelize(group) }.join(",")
-    end
-
-    def parsed_body
-      @parsed_body ||= MultiXml.parse(response_body)
+      arguments[:response_group].sort.map { |group| camelize(group) }.join(",")
     end
   end
 end

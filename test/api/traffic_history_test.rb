@@ -7,7 +7,7 @@ describe Alexa::API::TrafficHistory do
     @traffic_history.fetch(:url => "github.com", :range => 14)
 
     # 14 days from now
-    assert_in_delta (Time.now - 3600 * 24 * 14).to_i, @traffic_history.start.to_i, 0.001
+    assert_in_delta (Time.now - 3600 * 24 * 14).to_i, @traffic_history.arguments[:start].to_i, 0.001
   end
 
   describe "parsing xml" do

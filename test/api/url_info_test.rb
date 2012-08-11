@@ -6,7 +6,7 @@ describe Alexa::API::UrlInfo do
     @url_info = Alexa::API::UrlInfo.new(:access_key_id => "fake", :secret_access_key => "fake")
     @url_info.fetch(:url => "github.com", :response_group => "rank")
 
-    assert_equal ["rank"], @url_info.response_group
+    assert_equal ["rank"], @url_info.arguments[:response_group]
   end
 
   describe "parsing xml returned by options rank, links_in_count, site_data" do

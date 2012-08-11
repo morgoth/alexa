@@ -2,21 +2,28 @@ module Alexa::API
   class TrafficHistory
     include Alexa::Utils
 
-    attr_reader :url, :range, :start, :response_body
+    attr_reader :arguments, :response_body
 
     def initialize(credentials)
       @credentials = credentials
     end
 
     def fetch(arguments = {})
-      @url           = arguments[:url] || raise(ArgumentError.new("You must specify url"))
-      @range         = arguments.fetch(:range, 31)
-      @start         = arguments.fetch(:start) { Time.now - (3600 * 24 * range.to_i) }
+      raise ArgumentError, "You must specify url" unless arguments.has_key?(:url)
+      @arguments = arguments
+
+      @arguments[:range] = arguments.fetch(:range, 31)
+      @arguments[:start] = arguments.fetch(:start) { Time.now - (3600 * 24 * @arguments[:range].to_i) }
+
       @response_body = Alexa::Connection.new(@credentials).get(params)
       self
     end
 
-    # Attributes
+    def parsed_body
+      @parsed_body ||= MultiXml.parse(response_body)
+    end
+
+    # Response attributes
 
     def data
       @data ||= safe_retrieve(parsed_body, "TrafficHistoryResponse", "Response", "TrafficHistoryResult", "Alexa", "TrafficHistory", "HistoricalData", "Data")
@@ -28,18 +35,14 @@ module Alexa::API
       {
         "Action"        => "TrafficHistory",
         "ResponseGroup" => "History",
-        "Range"         => range,
+        "Range"         => arguments[:range],
         "Start"         => start_param,
-        "Url"           => url
+        "Url"           => arguments[:url]
       }
     end
 
     def start_param
-      start.respond_to?(:strftime) ? start.strftime("%Y%m%d") : start
-    end
-
-    def parsed_body
-      @parsed_body ||= MultiXml.parse(response_body)
+      arguments[:start].respond_to?(:strftime) ? arguments[:start].strftime("%Y%m%d") : arguments[:start]
     end
   end
 end

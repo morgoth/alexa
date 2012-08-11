@@ -4,21 +4,28 @@ module Alexa::API
 
     DEFAULT_RESPONSE_GROUP = ["categories", "related_categories", "language_categories", "letter_bars"]
 
-    attr_reader :response_group, :path, :descriptions, :response_body
+    attr_reader :arguments, :response_body
 
     def initialize(credentials)
       @credentials = credentials
     end
 
     def fetch(arguments = {})
-      @path           = arguments[:path] || raise(ArgumentError.new("You must specify path"))
-      @response_group = Array(arguments.fetch(:response_group, DEFAULT_RESPONSE_GROUP))
-      @descriptions   = arguments.fetch(:descriptions, true)
-      @response_body  = Alexa::Connection.new(@credentials).get(params)
+      raise ArgumentError, "You must specify path" unless arguments.has_key?(:path)
+      @arguments = arguments
+
+      @arguments[:response_group] = Array(arguments.fetch(:response_group, DEFAULT_RESPONSE_GROUP))
+      @arguments[:descriptions]   = arguments.fetch(:descriptions, true)
+
+      @response_body = Alexa::Connection.new(@credentials).get(params)
       self
     end
 
-    # Attributes
+    def parsed_body
+      @parsed_body ||= MultiXml.parse(response_body)
+    end
+
+    # Response attributes
 
     def categories
       @categories ||= safe_retrieve(parsed_body, "CategoryBrowseResponse", "Response", "CategoryBrowseResult", "Alexa", "CategoryBrowse", "Categories", "Category")
@@ -42,21 +49,17 @@ module Alexa::API
       {
         "Action"        => "CategoryBrowse",
         "ResponseGroup" => response_group_param,
-        "Path"          => path,
+        "Path"          => arguments[:path],
         "Descriptions"  => descriptions_param
       }
     end
 
     def response_group_param
-      response_group.sort.map { |group| camelize(group) }.join(",")
+      arguments[:response_group].sort.map { |group| camelize(group) }.join(",")
     end
 
     def descriptions_param
-      descriptions.to_s.capitalize
-    end
-
-    def parsed_body
-      @parsed_body ||= MultiXml.parse(response_body)
+      arguments[:descriptions].to_s.capitalize
     end
   end
 end
