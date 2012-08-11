@@ -1,6 +1,12 @@
 require "helper"
 
 describe Alexa::API::CategoryBrowse do
+  it "raises argument error when path not present" do
+    assert_raises Alexa::ArgumentError, /path/ do
+      Alexa::API::CategoryBrowse.new(:access_key_id => "fake", :secret_access_key => "fake").fetch
+    end
+  end
+
   describe "parsing xml" do
     before do
       stub_request(:get, %r{http://awis.amazonaws.com}).to_return(fixture("category_browse/card_games.txt"))

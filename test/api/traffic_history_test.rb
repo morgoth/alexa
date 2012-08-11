@@ -1,6 +1,12 @@
 require "helper"
 
 describe Alexa::API::TrafficHistory do
+  it "raises argument error when url not present" do
+    assert_raises Alexa::ArgumentError, /url/ do
+      Alexa::API::TrafficHistory.new(:access_key_id => "fake", :secret_access_key => "fake").fetch
+    end
+  end
+
   it "defaults start to be in range to current time" do
     stub_request(:get, %r{http://awis.amazonaws.com}).to_return(:body => "ok")
     @traffic_history = Alexa::API::TrafficHistory.new(:access_key_id => "fake", :secret_access_key => "fake")

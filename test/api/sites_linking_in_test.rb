@@ -1,6 +1,12 @@
 require "helper"
 
 describe Alexa::API::SitesLinkingIn do
+  it "raises argument error when url not present" do
+    assert_raises Alexa::ArgumentError, /url/ do
+      Alexa::API::SitesLinkingIn.new(:access_key_id => "fake", :secret_access_key => "fake").fetch
+    end
+  end
+
   describe "parsing xml" do
     before do
       stub_request(:get, %r{http://awis.amazonaws.com}).to_return(fixture("sites_linking_in/github_count_3.txt"))

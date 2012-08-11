@@ -1,6 +1,12 @@
 require "helper"
 
 describe Alexa::API::UrlInfo do
+  it "raises argument error when url not present" do
+    assert_raises Alexa::ArgumentError, /url/ do
+      Alexa::API::UrlInfo.new(:access_key_id => "fake", :secret_access_key => "fake").fetch
+    end
+  end
+
   it "allows to pass single attribute as response_group" do
     stub_request(:get, %r{http://awis.amazonaws.com}).to_return(:body => "ok")
     @url_info = Alexa::API::UrlInfo.new(:access_key_id => "fake", :secret_access_key => "fake")

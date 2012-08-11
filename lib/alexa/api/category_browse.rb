@@ -1,65 +1,57 @@
-module Alexa::API
-  class CategoryBrowse
-    include Alexa::Utils
+require "alexa/api/base"
 
-    DEFAULT_RESPONSE_GROUP = ["categories", "related_categories", "language_categories", "letter_bars"]
+module Alexa
+  module API
+    class CategoryBrowse < Base
+      DEFAULT_RESPONSE_GROUP = ["categories", "related_categories", "language_categories", "letter_bars"]
 
-    attr_reader :arguments, :response_body
+      def fetch(arguments = {})
+        raise ArgumentError.new("You must specify path") unless arguments.has_key?(:path)
+        @arguments = arguments
 
-    def initialize(credentials)
-      @credentials = credentials
-    end
+        @arguments[:response_group] = Array(arguments.fetch(:response_group, DEFAULT_RESPONSE_GROUP))
+        @arguments[:descriptions]   = arguments.fetch(:descriptions, true)
 
-    def fetch(arguments = {})
-      raise ArgumentError, "You must specify path" unless arguments.has_key?(:path)
-      @arguments = arguments
+        @response_body = Alexa::Connection.new(@credentials).get(params)
+        self
+      end
 
-      @arguments[:response_group] = Array(arguments.fetch(:response_group, DEFAULT_RESPONSE_GROUP))
-      @arguments[:descriptions]   = arguments.fetch(:descriptions, true)
+      # Response attributes
 
-      @response_body = Alexa::Connection.new(@credentials).get(params)
-      self
-    end
+      def categories
+        @categories ||= safe_retrieve(parsed_body, "CategoryBrowseResponse", "Response", "CategoryBrowseResult", "Alexa", "CategoryBrowse", "Categories", "Category")
+      end
 
-    def parsed_body
-      @parsed_body ||= MultiXml.parse(response_body)
-    end
+      def language_categories
+        @language_categories ||= safe_retrieve(parsed_body, "CategoryBrowseResponse", "Response", "CategoryBrowseResult", "Alexa", "CategoryBrowse", "LanguageCategories", "Category")
+      end
 
-    # Response attributes
+      def related_categories
+        @related_categories ||= safe_retrieve(parsed_body, "CategoryBrowseResponse", "Response", "CategoryBrowseResult", "Alexa", "CategoryBrowse", "RelatedCategories", "Category")
+      end
 
-    def categories
-      @categories ||= safe_retrieve(parsed_body, "CategoryBrowseResponse", "Response", "CategoryBrowseResult", "Alexa", "CategoryBrowse", "Categories", "Category")
-    end
+      def letter_bars
+        @letter_bars ||= safe_retrieve(parsed_body, "CategoryBrowseResponse", "Response", "CategoryBrowseResult", "Alexa", "CategoryBrowse", "LetterBars", "Category")
+      end
 
-    def language_categories
-      @language_categories ||= safe_retrieve(parsed_body, "CategoryBrowseResponse", "Response", "CategoryBrowseResult", "Alexa", "CategoryBrowse", "LanguageCategories", "Category")
-    end
+      private
 
-    def related_categories
-      @related_categories ||= safe_retrieve(parsed_body, "CategoryBrowseResponse", "Response", "CategoryBrowseResult", "Alexa", "CategoryBrowse", "RelatedCategories", "Category")
-    end
+      def params
+        {
+          "Action"        => "CategoryBrowse",
+          "ResponseGroup" => response_group_param,
+          "Path"          => arguments[:path],
+          "Descriptions"  => descriptions_param
+        }
+      end
 
-    def letter_bars
-      @letter_bars ||= safe_retrieve(parsed_body, "CategoryBrowseResponse", "Response", "CategoryBrowseResult", "Alexa", "CategoryBrowse", "LetterBars", "Category")
-    end
+      def response_group_param
+        arguments[:response_group].sort.map { |group| camelize(group) }.join(",")
+      end
 
-    private
-
-    def params
-      {
-        "Action"        => "CategoryBrowse",
-        "ResponseGroup" => response_group_param,
-        "Path"          => arguments[:path],
-        "Descriptions"  => descriptions_param
-      }
-    end
-
-    def response_group_param
-      arguments[:response_group].sort.map { |group| camelize(group) }.join(",")
-    end
-
-    def descriptions_param
-      arguments[:descriptions].to_s.capitalize
+      def descriptions_param
+        arguments[:descriptions].to_s.capitalize
+      end
     end
   end
 end
