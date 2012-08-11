@@ -29,5 +29,9 @@ describe Alexa::API::CategoryBrowse do
     it "returns letter bars" do
       assert_equal 36, @category_browse.letter_bars.size
     end
+
+    it "has success status code" do
+      assert_equal "Success", @category_browse.status_code
+    end
   end
 end

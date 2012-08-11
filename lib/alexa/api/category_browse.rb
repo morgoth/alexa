@@ -34,6 +34,10 @@ module Alexa
         @letter_bars ||= safe_retrieve(parsed_body, "CategoryBrowseResponse", "Response", "CategoryBrowseResult", "Alexa", "CategoryBrowse", "LetterBars", "Category")
       end
 
+      def status_code
+        safe_retrieve(parsed_body, "CategoryBrowseResponse", "Response", "ResponseStatus", "StatusCode")
+      end
+
       private
 
       def params

@@ -25,5 +25,9 @@ describe Alexa::API::SitesLinkingIn do
     it "has Url attribute on single site" do
       assert_equal "code.google.com:80/a/eclipselabs.org/p/m2eclipse-android-integration", @sites_linking_in.sites.first["Url"]
     end
+
+    it "has success status code" do
+      assert_equal "Success", @sites_linking_in.status_code
+    end
   end
 end

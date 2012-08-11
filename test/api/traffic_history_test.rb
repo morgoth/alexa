@@ -26,5 +26,17 @@ describe Alexa::API::TrafficHistory do
     it "returns data" do
       assert_equal 28, @traffic_history.data.size
     end
+
+    it "has success status code" do
+      assert_equal "Success", @traffic_history.status_code
+    end
+  end
+
+  it "has error status code" do
+    stub_request(:get, %r{http://awis.amazonaws.com}).to_return(fixture("traffic_history/alexa_error.txt"))
+    traffic_history = Alexa::API::TrafficHistory.new(:access_key_id => "fake", :secret_access_key => "fake")
+    traffic_history.fetch(:url => "amazon.com")
+
+    assert_equal "AlexaError", traffic_history.status_code
   end
 end

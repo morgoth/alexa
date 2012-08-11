@@ -85,6 +85,10 @@ module Alexa
         @related_links ||= safe_retrieve(parsed_body, "UrlInfoResponse", "Response", "UrlInfoResult", "Alexa", "Related", "RelatedLinks", "RelatedLink")
       end
 
+      def status_code
+        safe_retrieve(parsed_body, "UrlInfoResponse", "Response", "ResponseStatus", "StatusCode")
+      end
+
       private
 
       def params

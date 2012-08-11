@@ -30,6 +30,10 @@ module Alexa
         @listings ||= safe_retrieve(parsed_body, "CategoryListingsResponse", "Response", "CategoryListingsResult", "Alexa", "CategoryListings", "Listings", "Listing")
       end
 
+      def status_code
+        safe_retrieve(parsed_body, "CategoryListingsResponse", "Response", "ResponseStatus", "StatusCode")
+      end
+
       private
 
       def params

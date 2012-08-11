@@ -118,6 +118,14 @@ You can specify options:
 
 ## Caveats
 
+### Status Code
+
+You can retrieve Alexa status code calling `status_code` method.
+
+It happens (so far in TrafficHistory) that Alexa returns response `200` with `AlexaError` status.
+
+### Parsers
+
 Alexa is using `multi_xml` to parse XML documents. Tested with:
 
 * rexml

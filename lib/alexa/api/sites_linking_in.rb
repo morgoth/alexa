@@ -20,6 +20,10 @@ module Alexa
         @sites ||= safe_retrieve(parsed_body, "SitesLinkingInResponse", "Response", "SitesLinkingInResult", "Alexa", "SitesLinkingIn", "Site")
       end
 
+      def status_code
+        safe_retrieve(parsed_body, "SitesLinkingInResponse", "Response", "ResponseStatus", "StatusCode")
+      end
+
       private
 
       def params

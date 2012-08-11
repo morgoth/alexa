@@ -104,6 +104,10 @@ describe Alexa::API::UrlInfo do
     it "returns usage statistics" do
       assert_equal 4, @url_info.usage_statistics.size
     end
+
+    it "has success status code" do
+      assert_equal "Success", @url_info.status_code
+    end
   end
 
   describe "with github.com rank response group" do

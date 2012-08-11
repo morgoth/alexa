@@ -21,5 +21,9 @@ describe Alexa::API::CategoryListings do
     it "returns listings" do
       assert_equal 20, @category_listings.listings.size
     end
+
+    it "has success status code" do
+      assert_equal "Success", @category_listings.status_code
+    end
   end
 end

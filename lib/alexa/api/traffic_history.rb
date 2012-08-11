@@ -20,6 +20,10 @@ module Alexa
         @data ||= safe_retrieve(parsed_body, "TrafficHistoryResponse", "Response", "TrafficHistoryResult", "Alexa", "TrafficHistory", "HistoricalData", "Data")
       end
 
+      def status_code
+        safe_retrieve(parsed_body, "TrafficHistoryResponse", "Response", "ResponseStatus", "StatusCode")
+      end
+
       private
 
       def params
