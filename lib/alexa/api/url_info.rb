@@ -3,7 +3,7 @@ require "alexa/api/base"
 module Alexa
   module API
     class UrlInfo < Base
-      DEFAULT_RESPONSE_GROUP = ["adult_content", "contact_info", "keywords", "language", "links_in_count", "owned_domains", "rank", "rank_by_city", "rank_by_country", "related_links", "site_data", "speed", "usage_stats"]
+      DEFAULT_RESPONSE_GROUP = ["adult_content", "contact_info", "keywords", "language", "links_in_count", "owned_domains", "rank", "rank_by_city", "rank_by_country", "related_links", "site_data", "speed", "usage_stats", "categories"]
 
       def fetch(arguments = {})
         raise ArgumentError, "You must specify url" unless arguments.has_key?(:url)
@@ -83,6 +83,10 @@ module Alexa
 
       def related_links
         @related_links ||= safe_retrieve(parsed_body, "UrlInfoResponse", "Response", "UrlInfoResult", "Alexa", "Related", "RelatedLinks", "RelatedLink")
+      end
+      
+      def categories
+        @categories ||= safe_retrieve(parsed_body, "UrlInfoResponse", "Response", "UrlInfoResult", "Alexa", "Related", "Categories", "CategoryData")
       end
 
       def status_code
