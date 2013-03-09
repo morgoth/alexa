@@ -7,6 +7,7 @@ Gem::Specification.new do |gem|
   gem.description   = %q{Alexa Web Information Service library (AWIS)}
   gem.summary       = %q{Alexa Web Information Service library}
   gem.homepage      = "https://github.com/morgoth/alexa"
+  gem.license       = "MIT"
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   gem.files         = `git ls-files`.split("\n")
