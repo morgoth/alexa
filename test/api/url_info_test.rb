@@ -108,6 +108,10 @@ describe Alexa::API::UrlInfo do
     it "returns usage statistics" do
       assert_equal 4, @url_info.usage_statistics.size
     end
+    
+    it "returns categories" do
+      assert_equal 2, @url_info.categories.size
+    end
 
     it "has success status code" do
       assert_equal "Success", @url_info.status_code
