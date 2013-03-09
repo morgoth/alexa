@@ -87,6 +87,16 @@ Date: Wed, 12 Oct 2011 16:41:16 GMT
         <aws:Title>Agile Web Development</aws:Title>
       </aws:RelatedLink>
     </aws:RelatedLinks>
+	<aws:Categories>
+	  <aws:CategoryData>
+	    <aws:Title>Open Source/Project Hosting</aws:Title>
+	    <aws:AbsolutePath>Top/Computers/Open_Source/Project_Hosting</aws:AbsolutePath>
+	  </aws:CategoryData>
+	  <aws:CategoryData>
+	    <aws:Title>Tools/Git</aws:Title>
+	    <aws:AbsolutePath>Top/Computers/Software/Configuration_Management/Tools/Git</aws:AbsolutePath>
+	  </aws:CategoryData>
+	</aws:Categories>
   </aws:Related>
   <aws:TrafficData>
     <aws:DataUrl type="canonical">github.com</aws:DataUrl>
