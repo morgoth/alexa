@@ -35,6 +35,7 @@ Returns object that contains methods:
 * rank_by_country
 * rank_by_city
 * usage_statistics
+* categories
 
 You can specify options:
 
@@ -143,6 +144,7 @@ Currently alexa will not work with `ox` gem
 ## Contributors
 
 * [rmoriz](https://github.com/rmoriz)
+* [jasongill](https://github.com/jasongill)
 
 ## Continuous Integration
 
