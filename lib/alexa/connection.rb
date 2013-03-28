@@ -2,7 +2,7 @@ require "cgi"
 require "base64"
 require "openssl"
 require "digest/sha1"
-require "net/http"
+require "faraday"
 require "time"
 
 module Alexa
@@ -25,7 +25,7 @@ module Alexa
     end
 
     def handle_response(response)
-      case response.code.to_i
+      case response.status.to_i
       when 200...300
         response
       when 300...600
@@ -42,7 +42,7 @@ module Alexa
     end
 
     def request
-      Net::HTTP.get_response(uri)
+      Faraday.get(uri)
     end
 
     def timestamp
