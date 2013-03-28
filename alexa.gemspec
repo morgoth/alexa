@@ -17,6 +17,7 @@ Gem::Specification.new do |gem|
   gem.version       = Alexa::VERSION
 
   gem.add_dependency "multi_xml", ">= 0.5.0"
+  gem.add_dependency "faraday", "~> 0.8.7"
 
   gem.add_development_dependency "mocha"
   gem.add_development_dependency "webmock"
