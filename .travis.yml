@@ -2,7 +2,6 @@ notifications:
   disabled: true
 bundler_args: --without extra
 rvm:
-  - ree
   - 1.9.3
   - 2.0.0
 env:

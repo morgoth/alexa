@@ -22,4 +22,6 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "minitest", ">= 5.0.0"
   gem.add_development_dependency "mocha"
   gem.add_development_dependency "webmock"
+
+  gem.post_install_message = "Version 0.6.0 of alexa gem will require Ruby 1.9.3 or greater. If you still need 1.8.7 freeze gem version to ~> 0.5.1"
 end
