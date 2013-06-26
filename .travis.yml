@@ -1,7 +1,5 @@
 notifications:
   disabled: true
-before_install:
-  - gem install bundler
 bundler_args: --without extra
 rvm:
   - ree

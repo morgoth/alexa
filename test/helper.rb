@@ -1,6 +1,6 @@
 require "minitest/autorun"
 require "webmock/minitest"
-require "mocha"
+require "mocha/setup"
 
 require "alexa"
 
@@ -9,7 +9,7 @@ xml_parser = ENV["XML_PARSER"] || "libxml"
 require xml_parser if ["nokogiri", "libxml", "ox"].include?(xml_parser)
 MultiXml.parser = xml_parser
 
-class MiniTest::Unit::TestCase
+class MiniTest::Test
   def setup
     WebMock.disable_net_connect!
   end
