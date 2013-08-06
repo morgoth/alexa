@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 group :extra do
-  gem "debugger", :platform => [:ruby_19, :ruby_20]
+  gem "debugger"
 end
 
 gem "rake"

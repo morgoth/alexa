@@ -17,7 +17,6 @@ module Alexa
       end
 
       # Response attributes
-
       def categories
         @categories ||= safe_retrieve(parsed_body, "CategoryBrowseResponse", "Response", "CategoryBrowseResult", "Alexa", "CategoryBrowse", "Categories", "Category")
       end

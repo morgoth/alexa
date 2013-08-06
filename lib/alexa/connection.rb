@@ -21,7 +21,7 @@ module Alexa
 
     def get(params = {})
       self.params = params
-      encode handle_response(request).body
+      handle_response(request).body.force_encoding(Encoding::UTF_8)
     end
 
     def handle_response(response)
@@ -73,14 +73,6 @@ module Alexa
 
     def query
       default_params.merge(params).map { |key, value| "#{key}=#{CGI::escape(value.to_s)}" }.sort.join("&")
-    end
-
-    def encode(string)
-      if "muflon".respond_to?(:force_encoding)
-        string.force_encoding(Encoding::UTF_8)
-      else
-        string
-      end
     end
   end
 end

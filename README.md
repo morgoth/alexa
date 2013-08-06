@@ -145,6 +145,7 @@ Currently alexa will not work with `ox` gem
 
 * [rmoriz](https://github.com/rmoriz)
 * [jasongill](https://github.com/jasongill)
+* [sporkmonger](https://github.com/sporkmonger)
 
 ## Continuous Integration
 
