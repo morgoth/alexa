@@ -72,7 +72,7 @@ module Alexa
     end
 
     def query
-      default_params.merge(params).map { |key, value| "#{key}=#{CGI::escape(value.to_s)}" }.sort.join("&")
+      default_params.merge(params).map { |key, value| "#{key}=#{URI.escape(value.to_s, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))}" }.sort.join("&")
     end
   end
 end
