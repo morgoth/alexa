@@ -10,6 +10,8 @@ module Alexa
     attr_accessor :secret_access_key, :access_key_id
     attr_writer :params
 
+    RFC_3986_UNRESERVED_CHARS = "-_.~a-zA-Z\\d"
+
     def initialize(credentials = {})
       self.secret_access_key = credentials.fetch(:secret_access_key)
       self.access_key_id     = credentials.fetch(:access_key_id)
@@ -72,7 +74,7 @@ module Alexa
     end
 
     def query
-      default_params.merge(params).map { |key, value| "#{key}=#{URI.escape(value.to_s, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))}" }.sort.join("&")
+      default_params.merge(params).map { |key, value| "#{key}=#{URI.escape(value.to_s, Regexp.new("[^#{RFC_3986_UNRESERVED_CHARS}]"))}" }.sort.join("&")
     end
   end
 end
