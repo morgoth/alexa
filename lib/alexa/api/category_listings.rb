@@ -21,16 +21,14 @@ module Alexa
 
       def count
         return @count if defined?(@count)
-        if count = safe_retrieve(parsed_body, "CategoryListingsResponse", "Response", "CategoryListingsResult", "Alexa", "CategoryListings", "Count")
-          @count = count.to_i
-        end
+        count = safe_retrieve(parsed_body, "CategoryListingsResponse", "Response", "CategoryListingsResult", "Alexa", "CategoryListings", "Count")
+        @count = count ? count.to_i : nil
       end
 
       def recursive_count
         return @recursive_count if defined?(@recursive_count)
-        if recursive_count = safe_retrieve(parsed_body, "CategoryListingsResponse", "Response", "CategoryListingsResult", "Alexa", "CategoryListings", "RecursiveCount")
-          @recursive_count = recursive_count.to_i
-        end
+        recursive_count = safe_retrieve(parsed_body, "CategoryListingsResponse", "Response", "CategoryListingsResult", "Alexa", "CategoryListings", "RecursiveCount")
+        @recursive_count = recursive_count ? recursive_count.to_i : nil
       end
 
       def listings

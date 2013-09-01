@@ -26,9 +26,8 @@ module Alexa
 
       def range
         return @range if defined?(@range)
-        if range = safe_retrieve(parsed_body, "TrafficHistoryResponse", "Response", "TrafficHistoryResult", "Alexa", "TrafficHistory", "Range")
-          @range = range.to_i
-        end
+        range = safe_retrieve(parsed_body, "TrafficHistoryResponse", "Response", "TrafficHistoryResult", "Alexa", "TrafficHistory", "Range")
+        @range = range ? range.to_i : nil
       end
 
       def data

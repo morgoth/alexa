@@ -19,9 +19,8 @@ module Alexa
 
       def rank
         return @rank if defined?(@rank)
-        if rank = safe_retrieve(parsed_body, "UrlInfoResponse", "Response", "UrlInfoResult", "Alexa", "TrafficData", "Rank")
-          @rank = rank.to_i
-        end
+        rank = safe_retrieve(parsed_body, "UrlInfoResponse", "Response", "UrlInfoResult", "Alexa", "TrafficData", "Rank")
+        @rank = rank ? rank.to_i : nil
       end
 
       def rank_by_country
@@ -58,9 +57,8 @@ module Alexa
 
       def links_in_count
         return @links_in_count if defined?(@links_in_count)
-        if links_in_count = safe_retrieve(parsed_body, "UrlInfoResponse", "Response", "UrlInfoResult", "Alexa", "ContentData", "LinksInCount")
-          @links_in_count = links_in_count.to_i
-        end
+        links_in_count = safe_retrieve(parsed_body, "UrlInfoResponse", "Response", "UrlInfoResult", "Alexa", "ContentData", "LinksInCount")
+        @links_in_count = links_in_count ? links_in_count.to_i : nil
       end
 
       def keywords
@@ -69,22 +67,20 @@ module Alexa
 
       def speed_median_load_time
         return @speed_median_load_time if defined?(@speed_median_load_time)
-        if speed_median_load_time = safe_retrieve(parsed_body, "UrlInfoResponse", "Response", "UrlInfoResult", "Alexa", "ContentData", "Speed", "MedianLoadTime")
-          @speed_median_load_time = speed_median_load_time.to_i
-        end
+        speed_median_load_time = safe_retrieve(parsed_body, "UrlInfoResponse", "Response", "UrlInfoResult", "Alexa", "ContentData", "Speed", "MedianLoadTime")
+        @speed_median_load_time = speed_median_load_time ? speed_median_load_time.to_i : nil
       end
 
       def speed_percentile
         return @speed_percentile if defined?(@speed_percentile)
-        if speed_percentile = safe_retrieve(parsed_body, "UrlInfoResponse", "Response", "UrlInfoResult", "Alexa", "ContentData", "Speed", "Percentile")
-          @speed_percentile = speed_percentile.to_i
-        end
+        speed_percentile = safe_retrieve(parsed_body, "UrlInfoResponse", "Response", "UrlInfoResult", "Alexa", "ContentData", "Speed", "Percentile")
+        @speed_percentile = speed_percentile ? speed_percentile.to_i : nil
       end
 
       def related_links
         @related_links ||= safe_retrieve(parsed_body, "UrlInfoResponse", "Response", "UrlInfoResult", "Alexa", "Related", "RelatedLinks", "RelatedLink")
       end
-      
+
       def categories
         @categories ||= safe_retrieve(parsed_body, "UrlInfoResponse", "Response", "UrlInfoResult", "Alexa", "Related", "Categories", "CategoryData")
       end
