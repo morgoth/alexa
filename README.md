@@ -68,7 +68,7 @@ client = Alexa::Client.new(access_key_id: "key", secret_access_key: "secret")
 traffic_history = client.traffic_history(url: "site.com")
 ```
 
-Returns object that contains method:
+Returns object that contains methods:
 
 * site
 * range
