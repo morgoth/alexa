@@ -147,10 +147,11 @@ Currently alexa will not work with `ox` gem
 * [jasongill](https://github.com/jasongill)
 * [sporkmonger](https://github.com/sporkmonger)
 * [pelf](https://github.com/pelf)
+* [tyler-smith](https://github.com/tyler-smith)
 
 ## Continuous Integration
 
-[![Build Status](https://secure.travis-ci.org/morgoth/alexa.png?branch=master)](http://travis-ci.org/morgoth/alexa)
+[![Build Status](https://travis-ci.org/morgoth/alexa.svg?branch=master)](https://travis-ci.org/morgoth/alexa)
 
 ## Copyright
 
