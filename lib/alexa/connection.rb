@@ -52,7 +52,7 @@ module Alexa
     end
 
     def signature
-      Base64.encode64(OpenSSL::HMAC.digest(OpenSSL::Digest::Digest.new("sha256"), secret_access_key, sign)).strip
+      Base64.encode64(OpenSSL::HMAC.digest(OpenSSL::Digest.new("sha256"), secret_access_key, sign)).strip
     end
 
     def uri
