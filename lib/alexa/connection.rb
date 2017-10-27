@@ -39,7 +39,7 @@ module Alexa
           raise ResponseError.new(message, response)
         end
       else
-        raise ResponseError.new("Unknown code: #{respnse.code}", response)
+        raise ResponseError.new("Unknown code: #{response.code}", response)
       end
     end
 
