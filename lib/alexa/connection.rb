@@ -74,7 +74,9 @@ module Alexa
     end
 
     def query
-      default_params.merge(params).map { |key, value| "#{key}=#{URI.escape(value.to_s, Regexp.new("[^#{RFC_3986_UNRESERVED_CHARS}]"))}" }.sort.join("&")
+      default_params.merge(params).map do |key, value|
+        "#{key}=#{URI.escape(value.to_s, Regexp.new("[^#{RFC_3986_UNRESERVED_CHARS}]"))}"
+      end.sort.join("&")
     end
   end
 end

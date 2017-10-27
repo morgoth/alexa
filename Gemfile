@@ -1,9 +1,5 @@
 source "https://rubygems.org"
 
-group :extra do
-  gem "debugger"
-end
-
 gem "rake"
 
 # xml parsers
