@@ -13,5 +13,6 @@ require "alexa/api/url_info"
 
 module Alexa
   API_VERSION = "2005-07-11"
-  API_HOST    = "awis.amazonaws.com"
+  API_REGION  = "us-west-1"
+  API_HOST    = "https://awis.#{API_REGION}.amazonaws.com"
 end

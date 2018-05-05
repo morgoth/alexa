@@ -18,6 +18,7 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 1.9.3"
 
+  gem.add_dependency "aws-sigv4"
   gem.add_dependency "multi_xml", ">= 0.5.0"
   gem.add_dependency "faraday", "~> 0.8"
 

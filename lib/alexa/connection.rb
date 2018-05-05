@@ -1,10 +1,5 @@
-require "uri"
-require "cgi"
-require "base64"
-require "openssl"
-require "digest/sha1"
+require "aws-sigv4"
 require "faraday"
-require "time"
 
 module Alexa
   class Connection
@@ -12,6 +7,11 @@ module Alexa
     attr_writer :params
 
     RFC_3986_UNRESERVED_CHARS = "-_.~a-zA-Z\\d"
+    HEADERS = {
+      "Content-Type" => "application/xml",
+      "Accept" => "application/xml",
+      "User-Agent" => "Ruby alexa gem v#{Alexa::VERSION}"
+    }
 
     def initialize(credentials = {})
       self.secret_access_key = credentials.fetch(:secret_access_key)
@@ -45,37 +45,36 @@ module Alexa
     end
 
     def request
-      Faraday.get(uri)
-    end
-
-    def timestamp
-      @timestamp ||= Time::now.utc.strftime("%Y-%m-%dT%H:%M:%S.000Z")
-    end
-
-    def signature
-      Base64.encode64(OpenSSL::HMAC.digest(OpenSSL::Digest.new("sha256"), secret_access_key, sign)).strip
+      Faraday.new(uri, headers: headers).get
     end
 
     def uri
-      URI.parse("http://#{Alexa::API_HOST}/?" + query + "&Signature=" + CGI::escape(signature))
+      @uri ||= URI.parse("#{Alexa::API_HOST}/api?" << query)
     end
 
-    def default_params
-      {
-        "AWSAccessKeyId"   => access_key_id,
-        "SignatureMethod"  => "HmacSHA256",
-        "SignatureVersion" => "2",
-        "Timestamp"        => timestamp,
-        "Version"          => Alexa::API_VERSION
-      }
+    def headers
+      HEADERS.merge(auth_headers)
     end
 
-    def sign
-      "GET\n" + Alexa::API_HOST + "\n/\n" + query
+    def auth_headers
+      signer.sign_request(
+        http_method: "GET",
+        headers: HEADERS,
+        url: uri.to_s
+      ).headers
+    end
+
+    def signer
+      Aws::Sigv4::Signer.new(
+        service: "awis",
+        region: Alexa::API_REGION,
+        access_key_id: access_key_id,
+        secret_access_key: secret_access_key
+      )
     end
 
     def query
-      default_params.merge(params).map do |key, value|
+      params.map do |key, value|
         "#{key}=#{URI.escape(value.to_s, Regexp.new("[^#{RFC_3986_UNRESERVED_CHARS}]"))}"
       end.sort.join("&")
     end
