@@ -1,0 +1,79 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://awis.us-west-1.amazonaws.com/api
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/xml
+      Accept:
+      - application/xml
+      User-Agent:
+      - Ruby alexa gem v0.7.0
+      Host:
+      - awis.us-west-1.amazonaws.com
+      X-Amz-Date:
+      - 20180505T213255Z
+      X-Amz-Content-Sha256:
+      - e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=wrong/20180505/us-west-1/awis/aws4_request, SignedHeaders=accept;content-type;host;user-agent;x-amz-content-sha256;x-amz-date,
+        Signature=db4156069162c9ca4a5bca26e390449a869b34c1ba305a033bf7543487f196aa
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      Content-Type:
+      - application/xml
+      Content-Length:
+      - '765'
+      Connection:
+      - keep-alive
+      Date:
+      - Sat, 05 May 2018 21:32:56 GMT
+      X-Amzn-Requestid:
+      - dfe69419-50ab-11e8-b1ec-bd9f57093758
+      X-Amzn-Errortype:
+      - UnrecognizedClientException
+      X-Amz-Apigw-Id:
+      - GbppQGRryK4FQtw=
+      X-Cache:
+      - Error from cloudfront
+      Via:
+      - 1.1 492376a657ddc8d381dbc676ab798325.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - 2eYCRU-lN8F9f_aiXdpqBumvSBVpnw3rPRnVkUm-iWjXdXzJy6krvQ==
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" ?>
+        <aws:Response xmlns:aws="http://awis.amazonaws.com/doc/2005-10-05">
+          <aws:Response xmlns:aws="http://awis.amazonaws.com/doc/2005-07-11">
+            <aws:OperationRequest>
+              <aws:RequestId></aws:RequestId>
+            </aws:OperationRequest>
+            <aws:Result>
+              <aws:Alexa>
+                <aws:Request>
+                  <aws:Errors>
+                    <aws:Error>
+                      <aws:ErrorCode><![CDATA["The security token included in the request is invalid."]]></aws:ErrorCode>
+                    </aws:Error>
+                  </aws:Errors>
+                </aws:Request>
+              </aws:Alexa>
+            </aws:Result>
+            <aws:ResponseStatus xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/">
+              <aws:StatusCode>Error</aws:StatusCode>
+            </aws:ResponseStatus>
+          </aws:Response>
+        </aws:Response>
+    http_version: 
+  recorded_at: Sat, 05 May 2018 21:32:56 GMT
+recorded_with: VCR 4.0.0

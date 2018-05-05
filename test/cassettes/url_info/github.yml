@@ -1,0 +1,96 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://awis.us-west-1.amazonaws.com/api?Action=UrlInfo&ResponseGroup=LinksInCount,Rank,SiteData&Url=github.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/xml
+      Accept:
+      - application/xml
+      User-Agent:
+      - Ruby alexa gem v0.7.0
+      Host:
+      - awis.us-west-1.amazonaws.com
+      X-Amz-Date:
+      - 20180505T214634Z
+      X-Amz-Content-Sha256:
+      - e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=<FILTERED>/20180505/us-west-1/awis/aws4_request,
+        SignedHeaders=accept;content-type;host;user-agent;x-amz-content-sha256;x-amz-date,
+        Signature=d0bf79936460bf50ca101f8023a4907a59be805a52ee27d34fa709a8f888eafa
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/xml
+      Content-Length:
+      - '1403'
+      Connection:
+      - keep-alive
+      Date:
+      - Sat, 05 May 2018 21:46:34 GMT
+      X-Amzn-Requestid:
+      - c7cb16a4-50ad-11e8-bceb-8b57e96d59b4
+      X-Amz-Apigw-Id:
+      - GbrpKG6ISK4FWWw=
+      X-Amzn-Trace-Id:
+      - Root=1-5aee263a-806fd767aa7d4bb3b6618b9e
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 b7f7970e9c911e165d4cb9f70deac42a.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - 8yWqMcKzu87DSJVKJeYVfdH49yzSGOfYfNtakEC9vRvYLTHqEbaiBw==
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" ?>
+        <aws:UrlInfoResponse xmlns:aws="http://awis.amazonaws.com/doc/2005-10-05">
+          <aws:Response xmlns:aws="http://awis.amazonaws.com/doc/2005-07-11">
+            <aws:OperationRequest>
+              <aws:RequestId>c7ce241f-50ad-11e8-9bfd-2771577f700b</aws:RequestId>
+            </aws:OperationRequest>
+            <aws:UrlInfoResult>
+              <aws:Alexa>
+                <aws:Request>
+                  <aws:Arguments>
+                    <aws:Argument>
+                      <aws:Name>url</aws:Name>
+                      <aws:Value>github.com</aws:Value>
+                    </aws:Argument>
+                    <aws:Argument>
+                      <aws:Name>responsegroup</aws:Name>
+                      <aws:Value>LinksInCount,Rank,SiteData</aws:Value>
+                    </aws:Argument>
+                  </aws:Arguments>
+                </aws:Request>
+                <aws:ContentData>
+                  <aws:DataUrl type="canonical">github.com/</aws:DataUrl>
+                  <aws:SiteData>
+                    <aws:Title>GitHub</aws:Title>
+                  </aws:SiteData>
+                  <aws:LinksInCount>99073</aws:LinksInCount>
+                </aws:ContentData>
+                <aws:TrafficData>
+                  <aws:DataUrl type="canonical">github.com/</aws:DataUrl>
+                  <aws:Rank>63</aws:Rank>
+                </aws:TrafficData>
+              </aws:Alexa>
+            </aws:UrlInfoResult>
+            <aws:ResponseStatus xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/">
+              <aws:StatusCode>Success</aws:StatusCode>
+            </aws:ResponseStatus>
+          </aws:Response>
+        </aws:UrlInfoResponse>
+    http_version: 
+  recorded_at: Sat, 05 May 2018 21:46:35 GMT
+recorded_with: VCR 4.0.0

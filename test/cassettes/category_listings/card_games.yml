@@ -1,0 +1,232 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://awis.us-west-1.amazonaws.com/api?Action=CategoryListings&Count=20&Descriptions=True&Path=Top/Games/Card_Games&Recursive=True&ResponseGroup=Listings&SortBy=Popularity&Start=0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/xml
+      Accept:
+      - application/xml
+      User-Agent:
+      - Ruby alexa gem v0.7.0
+      Host:
+      - awis.us-west-1.amazonaws.com
+      X-Amz-Date:
+      - 20180505T215951Z
+      X-Amz-Content-Sha256:
+      - e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=<FILTERED>/20180505/us-west-1/awis/aws4_request,
+        SignedHeaders=accept;content-type;host;user-agent;x-amz-content-sha256;x-amz-date,
+        Signature=7fa0ca12be7add8a7fd1303e1ed3d2e251b7120fe16cfed817cebe50c01756c3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/xml
+      Content-Length:
+      - '10264'
+      Connection:
+      - keep-alive
+      Date:
+      - Sat, 05 May 2018 21:59:52 GMT
+      X-Amzn-Requestid:
+      - a3424cb5-50af-11e8-a41b-ad036b599443
+      X-Amz-Apigw-Id:
+      - GbtlzEcQyK4Fq5w=
+      X-Amzn-Trace-Id:
+      - Root=1-5aee2958-ab9b2fb202d565c116091439
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 e8929a64b6920fabf88f772b8cd0125c.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - A_7y4IBW4Ruhn3Y8iiiOwwZmlk4jtayA-YfvQQGlidFHza9gbG8biw==
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" ?>
+        <aws:CategoryListingsResponse xmlns:aws="http://awis.amazonaws.com/doc/2005-10-05">
+          <aws:Response xmlns:aws="http://awis.amazonaws.com/doc/2005-07-11">
+            <aws:OperationRequest>
+              <aws:RequestId>a343ac39-50af-11e8-a44f-bd7180612d0c</aws:RequestId>
+            </aws:OperationRequest>
+            <aws:CategoryListingsResult>
+              <aws:Alexa>
+                <aws:Request>
+                  <aws:Arguments>
+                    <aws:Argument>
+                      <aws:Name>path</aws:Name>
+                      <aws:Value>Top/Games/Card_Games</aws:Value>
+                    </aws:Argument>
+                    <aws:Argument>
+                      <aws:Name>start</aws:Name>
+                      <aws:Value>0</aws:Value>
+                    </aws:Argument>
+                    <aws:Argument>
+                      <aws:Name>count</aws:Name>
+                      <aws:Value>20</aws:Value>
+                    </aws:Argument>
+                    <aws:Argument>
+                      <aws:Name>sortby</aws:Name>
+                      <aws:Value>Popularity</aws:Value>
+                    </aws:Argument>
+                    <aws:Argument>
+                      <aws:Name>descriptions</aws:Name>
+                      <aws:Value>True</aws:Value>
+                    </aws:Argument>
+                    <aws:Argument>
+                      <aws:Name>recursive</aws:Name>
+                      <aws:Value>True</aws:Value>
+                    </aws:Argument>
+                    <aws:Argument>
+                      <aws:Name>responsegroup</aws:Name>
+                      <aws:Value>Listings</aws:Value>
+                    </aws:Argument>
+                  </aws:Arguments>
+                </aws:Request>
+                <aws:CategoryListings>
+                  <aws:RecursiveCount>799</aws:RecursiveCount>
+                  <aws:Count>0</aws:Count>
+                  <aws:Listings>
+                    <aws:Listing>
+                      <aws:DataUrl type="navigable">http://ace2three.com/</aws:DataUrl>
+                      <aws:Title>Ace2Three - the best Indian Rummy</aws:Title>
+                      <aws:PopularityRank>14946</aws:PopularityRank>
+                      <aws:Description>Play Indian Rummy and Win real cash prizes. Play rummy against live players in single and multi-table tournaments.</aws:Description>
+                    </aws:Listing>
+                    <aws:Listing>
+                      <aws:DataUrl type="navigable">http://www.bridgewebs.com/</aws:DataUrl>
+                      <aws:Title>BridgeWebs</aws:Title>
+                      <aws:PopularityRank>37505</aws:PopularityRank>
+                      <aws:Description>Enables bridge clubs and associations to provide a web site complete with calendar, news and results service. Offers interface with scoring and dealing programs.</aws:Description>
+                    </aws:Listing>
+                    <aws:Listing>
+                      <aws:DataUrl type="navigable">http://www.pagat.com/</aws:DataUrl>
+                      <aws:Title>Rules of Card Games</aws:Title>
+                      <aws:PopularityRank>38639</aws:PopularityRank>
+                      <aws:Description>A collection of hundreds of card and tile game rules arranged alphabetically, categorically, and geographically.</aws:Description>
+                    </aws:Listing>
+                    <aws:Listing>
+                      <aws:DataUrl type="navigable">http://www.acbl.org/</aws:DataUrl>
+                      <aws:Title>American Contract Bridge League</aws:Title>
+                      <aws:PopularityRank>51030</aws:PopularityRank>
+                      <aws:Description>Organizes the game in North America. Includes tournaments calendar and results, places to play, events, shopping, members information, and learning resources. Official site.</aws:Description>
+                    </aws:Listing>
+                    <aws:Listing>
+                      <aws:DataUrl type="navigable">http://www.bridgewinners.com/</aws:DataUrl>
+                      <aws:Title>Bridge Winners</aws:Title>
+                      <aws:PopularityRank>51497</aws:PopularityRank>
+                      <aws:Description>Offers bridge news, articles and problems. Includes ACBL convention card editor and a forum.</aws:Description>
+                    </aws:Listing>
+                    <aws:Listing>
+                      <aws:DataUrl type="navigable">http://nofearbridge.co.uk/</aws:DataUrl>
+                      <aws:Title>No Fear Bridge</aws:Title>
+                      <aws:PopularityRank>70265</aws:PopularityRank>
+                      <aws:Description>A collection of resources for beginners. Including interactive bridge quizzes, flash cards, Acol bidding crib sheet, information on duplicate bridge.</aws:Description>
+                    </aws:Listing>
+                    <aws:Listing>
+                      <aws:DataUrl type="navigable">http://www.ebu.co.uk/</aws:DataUrl>
+                      <aws:Title>English Bridge Union</aws:Title>
+                      <aws:PopularityRank>83032</aws:PopularityRank>
+                      <aws:Description>Organizes bridge in England. Provides schedule and results of national tournaments, bridge teaching programme, membership information. Official site.</aws:Description>
+                    </aws:Listing>
+                    <aws:Listing>
+                      <aws:DataUrl type="navigable">http://www.bridgeguys.com/</aws:DataUrl>
+                      <aws:Title>Bridge Guys</aws:Title>
+                      <aws:PopularityRank>131599</aws:PopularityRank>
+                      <aws:Description>Lists and defines a large number of systems and conventions.</aws:Description>
+                    </aws:Listing>
+                    <aws:Listing>
+                      <aws:DataUrl type="navigable">http://www.usgamesinc.com/</aws:DataUrl>
+                      <aws:Title>U.S. Games Systems, Inc.</aws:Title>
+                      <aws:PopularityRank>139351</aws:PopularityRank>
+                      <aws:Description>A wide variety of tarot cards and card games.</aws:Description>
+                    </aws:Listing>
+                    <aws:Listing>
+                      <aws:DataUrl type="navigable">http://www.bridgebum.com/</aws:DataUrl>
+                      <aws:Title>Tang, Jeff</aws:Title>
+                      <aws:PopularityRank>151510</aws:PopularityRank>
+                      <aws:Description>Articles, conventions, and a guide on etiquette for beginners.</aws:Description>
+                    </aws:Listing>
+                    <aws:Listing>
+                      <aws:DataUrl type="navigable">http://www.bridgehands.com/</aws:DataUrl>
+                      <aws:Title>BridgeHands</aws:Title>
+                      <aws:PopularityRank>168243</aws:PopularityRank>
+                      <aws:Description>Presents an encyclopedia with conventions and play, laws, rules, regulations. Includes reviews, newsletter and web hosting.</aws:Description>
+                    </aws:Listing>
+                    <aws:Listing>
+                      <aws:DataUrl type="navigable">http://www.nswba.com.au/</aws:DataUrl>
+                      <aws:Title>New South Wales Bridge Association</aws:Title>
+                      <aws:PopularityRank>173059</aws:PopularityRank>
+                      <aws:Description>State association provides member information, club directory, tournament and appeals results, newsletters, and lessons information. [East Sydney]</aws:Description>
+                    </aws:Listing>
+                    <aws:Listing>
+                      <aws:DataUrl type="navigable">http://www.worldbridge.org/</aws:DataUrl>
+                      <aws:Title>World Bridge Federation</aws:Title>
+                      <aws:PopularityRank>177841</aws:PopularityRank>
+                      <aws:Description>The official site of the body responsible for organizing world championships.</aws:Description>
+                    </aws:Listing>
+                    <aws:Listing>
+                      <aws:DataUrl type="navigable">http://www.sjgames.com/illuminati/</aws:DataUrl>
+                      <aws:Title>Steve Jackson Games</aws:Title>
+                      <aws:PopularityRank>188574</aws:PopularityRank>
+                      <aws:Description>Official publishers site.</aws:Description>
+                    </aws:Listing>
+                    <aws:Listing>
+                      <aws:DataUrl type="navigable">http://larryco.com/</aws:DataUrl>
+                      <aws:Title>Cohen, Larry</aws:Title>
+                      <aws:PopularityRank>191901</aws:PopularityRank>
+                      <aws:Description>Presents information about an American professional player, his books, CDs and upcoming cruises and seminars. Provides sets of bidding practice hands.</aws:Description>
+                    </aws:Listing>
+                    <aws:Listing>
+                      <aws:DataUrl type="navigable">http://www.bridgemate.com/</aws:DataUrl>
+                      <aws:Title>Bridgemate</aws:Title>
+                      <aws:PopularityRank>196756</aws:PopularityRank>
+                      <aws:Description>Netherlands based Bridge Systems offers wireless scoring solutions. Includes products, support information and distributors.</aws:Description>
+                    </aws:Listing>
+                    <aws:Listing>
+                      <aws:DataUrl type="navigable">http://www.deepfinesse.com/</aws:DataUrl>
+                      <aws:Title>Deep Finesse</aws:Title>
+                      <aws:PopularityRank>221033</aws:PopularityRank>
+                      <aws:Description>Windows XP/Vista/7 program analyzes deals and will solve any double-dummy problem. Includes description, reviews, and download.</aws:Description>
+                    </aws:Listing>
+                    <aws:Listing>
+                      <aws:DataUrl type="navigable">http://www.bridgeclues.com/</aws:DataUrl>
+                      <aws:Title>Bridgeclues</aws:Title>
+                      <aws:PopularityRank>226761</aws:PopularityRank>
+                      <aws:Description>Presents daily articles by Mike Lawrence.</aws:Description>
+                    </aws:Listing>
+                    <aws:Listing>
+                      <aws:DataUrl type="navigable">http://www.jeff-goldsmith.org/</aws:DataUrl>
+                      <aws:Title>Goldsmith, Jeff</aws:Title>
+                      <aws:PopularityRank>229461</aws:PopularityRank>
+                      <aws:Description>A series of behind-the-shoulder type articles, Bridge Without Sam, and online tools.</aws:Description>
+                    </aws:Listing>
+                    <aws:Listing>
+                      <aws:DataUrl type="navigable">http://www.rpbridge.net/</aws:DataUrl>
+                      <aws:Title>For Bridge Players by Richard Pavlicek</aws:Title>
+                      <aws:PopularityRank>239111</aws:PopularityRank>
+                      <aws:Description>Offers bidding polls and play contests, quizzes, puzzles, articles, humor, lesson material, calculators and utilities. Includes &quot;Standard American&quot; bridge bidding guides.</aws:Description>
+                    </aws:Listing>
+                  </aws:Listings>
+                  <aws:ReviewersRaveListings/>
+                </aws:CategoryListings>
+              </aws:Alexa>
+            </aws:CategoryListingsResult>
+            <aws:ResponseStatus xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/">
+              <aws:StatusCode>Success</aws:StatusCode>
+            </aws:ResponseStatus>
+          </aws:Response>
+        </aws:CategoryListingsResponse>
+    http_version: 
+  recorded_at: Sat, 05 May 2018 21:59:52 GMT
+recorded_with: VCR 4.0.0

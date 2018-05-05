@@ -1,4 +1,4 @@
-require "helper"
+require_relative "../helper"
 
 describe Alexa::API::UrlInfo do
   it "raises argument error when url not present" do
@@ -7,23 +7,16 @@ describe Alexa::API::UrlInfo do
     end
   end
 
-  it "allows to pass single attribute as response_group" do
-    stub_request(:get, %r{http://awis.amazonaws.com}).to_return(:body => "ok")
-    @url_info = Alexa::API::UrlInfo.new(:access_key_id => "fake", :secret_access_key => "fake")
-    @url_info.fetch(:url => "github.com", :response_group => "rank")
-
-    assert_equal ["rank"], @url_info.arguments[:response_group]
-  end
-
   describe "parsing xml returned by options rank, links_in_count, site_data" do
     before do
-      stub_request(:get, %r{http://awis.amazonaws.com}).to_return(fixture("url_info/custom-response-group.txt"))
-      @url_info = Alexa::API::UrlInfo.new(:access_key_id => "fake", :secret_access_key => "fake")
-      @url_info.fetch(:url => "github.com", :response_group => ["rank", "links_in_count", "site_data"])
+      @url_info = Alexa::API::UrlInfo.new(:access_key_id => ACCESS_KEY_ID, :secret_access_key => SECRET_ACCESS_KEY)
+      VCR.use_cassette("url_info/github") do
+        @url_info.fetch(:url => "github.com", :response_group => ["rank", "links_in_count", "site_data"])
+      end
     end
 
     it "returns rank" do
-      assert_equal 493, @url_info.rank
+      assert_equal 63, @url_info.rank
     end
 
     it "returns data url" do
@@ -34,26 +27,21 @@ describe Alexa::API::UrlInfo do
       assert_equal "GitHub", @url_info.site_title
     end
 
-    it "returns site description" do
-      expected = "Online project hosting using Git. Includes source-code browser, in-line editing, wikis, and ticketing. Free for public open-source code. Commercial closed source hosting is also available."
-
-      assert_equal expected, @url_info.site_description
-    end
-
     it "has request id" do
-      assert_equal "2bc0f070-540f-8fbf-6804-cd6c9241a039", @url_info.request_id
+      refute_nil @url_info.request_id
     end
   end
 
   describe "with github.com full response group" do
     before do
-      stub_request(:get, %r{http://awis.amazonaws.com}).to_return(fixture("url_info/github_full.txt"))
-      @url_info = Alexa::API::UrlInfo.new(:access_key_id => "fake", :secret_access_key => "fake")
-      @url_info.fetch(:url => "github.com")
+      @url_info = Alexa::API::UrlInfo.new(:access_key_id => ACCESS_KEY_ID, :secret_access_key => SECRET_ACCESS_KEY)
+      VCR.use_cassette("url_info/github-full") do
+        @url_info.fetch(:url => "github.com")
+      end
     end
 
     it "returns rank" do
-      assert_equal 551, @url_info.rank
+      assert_equal 63, @url_info.rank
     end
 
     it "returns data url" do
@@ -65,7 +53,7 @@ describe Alexa::API::UrlInfo do
     end
 
     it "returns site description" do
-      expected = "Online project hosting using Git. Includes source-code browser, in-line editing, wikis, and ticketing. Free for public open-source code. Commercial closed source hosting is also available."
+      expected = "GitHub is the best place to share code with friends, co-workers, classmates, and complete strangers. Over four million people use GitHub to build amazing things together."
       assert_equal expected, @url_info.site_description
     end
 
@@ -78,7 +66,7 @@ describe Alexa::API::UrlInfo do
     end
 
     it "returns links in count" do
-      assert_equal 43819, @url_info.links_in_count
+      assert_equal 99073, @url_info.links_in_count
     end
 
     it "returns keywords" do
@@ -90,41 +78,27 @@ describe Alexa::API::UrlInfo do
     end
 
     it "returns speed_median load time" do
-      assert_equal 1031, @url_info.speed_median_load_time
+      assert_equal 1825, @url_info.speed_median_load_time
     end
 
     it "returns speed percentile" do
-      assert_equal 68, @url_info.speed_percentile
+      assert_equal 52, @url_info.speed_percentile
     end
 
     it "returns rank by country" do
-      assert_equal 19, @url_info.rank_by_country.size
-    end
-
-    it "returns rank by city" do
-      assert_equal 163, @url_info.rank_by_city.size
+      assert_equal 29, @url_info.rank_by_country.size
     end
 
     it "returns usage statistics" do
       assert_equal 4, @url_info.usage_statistics.size
     end
-    
+
     it "returns categories" do
       assert_equal 2, @url_info.categories.size
     end
 
     it "has success status code" do
       assert_equal "Success", @url_info.status_code
-    end
-  end
-
-  describe "with github.com rank response group" do
-    it "successfuly connects" do
-      stub_request(:get, %r{http://awis.amazonaws.com}).to_return(fixture("url_info/github_rank.txt"))
-      @url_info = Alexa::API::UrlInfo.new(:access_key_id => "fake", :secret_access_key => "fake")
-      @url_info.fetch(:url => "github.com", :response_group => ["rank"])
-
-      assert_equal 551, @url_info.rank
     end
   end
 end

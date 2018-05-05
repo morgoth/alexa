@@ -1,17 +1,12 @@
-require "helper"
+require_relative "../helper"
 
 describe Alexa::API::CategoryBrowse do
-  it "raises argument error when path not present" do
-    assert_raises Alexa::ArgumentError, /path/ do
-      Alexa::API::CategoryBrowse.new(:access_key_id => "fake", :secret_access_key => "fake").fetch
-    end
-  end
-
   describe "parsing xml" do
     before do
-      stub_request(:get, %r{http://awis.amazonaws.com}).to_return(fixture("category_browse/card_games.txt"))
-      @category_browse = Alexa::API::CategoryBrowse.new(:access_key_id => "fake", :secret_access_key => "fake")
-      @category_browse.fetch(:path => "Top/Games/Card_Games")
+      @category_browse = Alexa::API::CategoryBrowse.new(:access_key_id => ACCESS_KEY_ID, :secret_access_key => SECRET_ACCESS_KEY)
+      VCR.use_cassette("category_browse/card_games") do
+        @category_browse.fetch(:path => "Top/Games/Card_Games")
+      end
     end
 
     it "returns categories" do
@@ -35,7 +30,7 @@ describe Alexa::API::CategoryBrowse do
     end
 
     it "has request id" do
-      assert_equal "c8bec6fe-84f3-9a8e-7444-47f86c64d74b", @category_browse.request_id
+      refute_nil @category_browse.request_id
     end
   end
 end

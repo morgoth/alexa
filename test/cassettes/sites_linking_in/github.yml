@@ -1,0 +1,107 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://awis.us-west-1.amazonaws.com/api?Action=SitesLinkingIn&Count=3&ResponseGroup=SitesLinkingIn&Start=0&Url=github.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/xml
+      Accept:
+      - application/xml
+      User-Agent:
+      - Ruby alexa gem v0.7.0
+      Host:
+      - awis.us-west-1.amazonaws.com
+      X-Amz-Date:
+      - 20180505T221659Z
+      X-Amz-Content-Sha256:
+      - e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=<FILTERED>/20180505/us-west-1/awis/aws4_request,
+        SignedHeaders=accept;content-type;host;user-agent;x-amz-content-sha256;x-amz-date,
+        Signature=9d32f60dbd7aaa5ca740d3d9954fe8aa9706178246c233a9b9b885f6d4f72507
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/xml
+      Content-Length:
+      - '1864'
+      Connection:
+      - keep-alive
+      Date:
+      - Sat, 05 May 2018 22:17:00 GMT
+      X-Amzn-Requestid:
+      - 07a90c66-50b2-11e8-9426-2b65e11d594f
+      X-Amz-Apigw-Id:
+      - GbwGVExbyK4FjIA=
+      X-Amzn-Trace-Id:
+      - Root=1-5aee2d5b-f6be9eab0ded4dfb752501d5
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 ac27d939fa02703c4b28926f53f95083.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - YzEf0mzx3spehXDYbf7t6iPKvgr2jT8DL5T4jFBie2GeLYjdfWNe1w==
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" ?>
+        <aws:SitesLinkingInResponse xmlns:aws="http://awis.amazonaws.com/doc/2005-10-05">
+          <aws:Response xmlns:aws="http://awis.amazonaws.com/doc/2005-07-11">
+            <aws:OperationRequest>
+              <aws:RequestId>07ab0880-50b2-11e8-a44f-bd7180612d0c</aws:RequestId>
+            </aws:OperationRequest>
+            <aws:SitesLinkingInResult>
+              <aws:Alexa>
+                <aws:Request>
+                  <aws:Arguments>
+                    <aws:Argument>
+                      <aws:Name>start</aws:Name>
+                      <aws:Value>0</aws:Value>
+                    </aws:Argument>
+                    <aws:Argument>
+                      <aws:Name>count</aws:Name>
+                      <aws:Value>3</aws:Value>
+                    </aws:Argument>
+                    <aws:Argument>
+                      <aws:Name>url</aws:Name>
+                      <aws:Value>github.com</aws:Value>
+                    </aws:Argument>
+                    <aws:Argument>
+                      <aws:Name>responsegroup</aws:Name>
+                      <aws:Value>SitesLinkingIn</aws:Value>
+                    </aws:Argument>
+                  </aws:Arguments>
+                </aws:Request>
+                <aws:SitesLinkingIn>
+                  <aws:Site>
+                    <aws:Title>baidu.com</aws:Title>
+                    <aws:Url>anquan.baidu.com:80/bbs/forum.php?mod=viewthread&amp;tid=86532</aws:Url>
+                  </aws:Site>
+                  <aws:Site>
+                    <aws:Title>qq.com</aws:Title>
+                    <aws:Url>gad.qq.com:80/article/detail/26306</aws:Url>
+                  </aws:Site>
+                  <aws:Site>
+                    <aws:Title>amazon.com</aws:Title>
+                    <aws:Url>docs.aws.amazon.com:80/AWSCloudFormation/latest/UserGuide/aws-resource-init.html</aws:Url>
+                  </aws:Site>
+                </aws:SitesLinkingIn>
+              </aws:Alexa>
+            </aws:SitesLinkingInResult>
+            <aws:ResponseStatus xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/">
+              <aws:StatusCode>Success</aws:StatusCode>
+            </aws:ResponseStatus>
+          </aws:Response>
+        </aws:SitesLinkingInResponse>
+    http_version: 
+  recorded_at: Sat, 05 May 2018 22:17:00 GMT
+recorded_with: VCR 4.0.0

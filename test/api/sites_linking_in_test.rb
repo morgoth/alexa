@@ -1,17 +1,12 @@
-require "helper"
+require_relative "../helper"
 
 describe Alexa::API::SitesLinkingIn do
-  it "raises argument error when url not present" do
-    assert_raises Alexa::ArgumentError, /url/ do
-      Alexa::API::SitesLinkingIn.new(:access_key_id => "fake", :secret_access_key => "fake").fetch
-    end
-  end
-
   describe "parsing xml" do
     before do
-      stub_request(:get, %r{http://awis.amazonaws.com}).to_return(fixture("sites_linking_in/github_count_3.txt"))
-      @sites_linking_in = Alexa::API::SitesLinkingIn.new(:access_key_id => "fake", :secret_access_key => "fake")
-      @sites_linking_in.fetch(:url => "github.com", :count => 3)
+      @sites_linking_in = Alexa::API::SitesLinkingIn.new(:access_key_id => ACCESS_KEY_ID, :secret_access_key => SECRET_ACCESS_KEY)
+      VCR.use_cassette("sites_linking_in/github") do
+        @sites_linking_in.fetch(:url => "github.com", :count => 3)
+      end
     end
 
     it "returns sites" do
@@ -19,11 +14,11 @@ describe Alexa::API::SitesLinkingIn do
     end
 
     it "has Title attribute on single site" do
-      assert_equal "google.com", @sites_linking_in.sites.first["Title"]
+      assert_equal "baidu.com", @sites_linking_in.sites.first["Title"]
     end
 
     it "has Url attribute on single site" do
-      assert_equal "code.google.com:80/a/eclipselabs.org/p/m2eclipse-android-integration", @sites_linking_in.sites.first["Url"]
+      assert_equal "anquan.baidu.com:80/bbs/forum.php?mod=viewthread&tid=86532", @sites_linking_in.sites.first["Url"]
     end
 
     it "has success status code" do
@@ -31,7 +26,7 @@ describe Alexa::API::SitesLinkingIn do
     end
 
     it "has request id" do
-      assert_equal "abb553a3-035f-8d12-f353-40532a087b52", @sites_linking_in.request_id
+      refute_nil @sites_linking_in.request_id
     end
   end
 end
