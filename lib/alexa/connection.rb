@@ -1,5 +1,5 @@
 require "aws-sigv4"
-require "faraday"
+require "net/https"
 
 module Alexa
   class Connection
@@ -28,24 +28,22 @@ module Alexa
     end
 
     def handle_response(response)
-      case response.status.to_i
-      when 200...300
+      case response
+      when Net::HTTPSuccess
         response
-      when 300...600
-        if response.body.nil?
-          raise ResponseError.new(nil, response)
-        else
-          xml = MultiXml.parse(response.body)
-          message = xml["Response"]["Errors"]["Error"]["Message"]
-          raise ResponseError.new(message, response)
-        end
       else
-        raise ResponseError.new("Unknown code: #{response.code}", response)
+        raise ResponseError.new(response.body, response)
       end
     end
 
     def request
-      Faraday.new(uri, headers: headers).get
+      req = Net::HTTP::Get.new(uri)
+      headers.each do |key, value|
+        req[key] = value
+      end
+      Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
+        http.request(req)
+      end
     end
 
     def uri
