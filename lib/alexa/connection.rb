@@ -1,12 +1,11 @@
+require "cgi"
 require "aws-sigv4"
 require "net/https"
 
 module Alexa
   class Connection
-    attr_accessor :secret_access_key, :access_key_id
-    attr_writer :params
+    attr_reader :params, :secret_access_key, :access_key_id
 
-    RFC_3986_UNRESERVED_CHARS = "-_.~a-zA-Z\\d"
     HEADERS = {
       "Content-Type" => "application/xml",
       "Accept" => "application/xml",
@@ -14,18 +13,16 @@ module Alexa
     }
 
     def initialize(credentials = {})
-      self.secret_access_key = credentials.fetch(:secret_access_key)
-      self.access_key_id     = credentials.fetch(:access_key_id)
-    end
-
-    def params
-      @params ||= {}
+      @secret_access_key = credentials.fetch(:secret_access_key)
+      @access_key_id     = credentials.fetch(:access_key_id)
     end
 
     def get(params = {})
-      self.params = params
+      @params = params
       handle_response(request).body.force_encoding(Encoding::UTF_8)
     end
+
+    private
 
     def handle_response(response)
       case response
@@ -73,8 +70,8 @@ module Alexa
 
     def query
       params.map do |key, value|
-        "#{key}=#{URI.escape(value.to_s, Regexp.new("[^#{RFC_3986_UNRESERVED_CHARS}]"))}"
-      end.sort.join("&")
+        "#{key}=#{CGI.escape(value.to_s)}"
+      end.sort!.join("&")
     end
   end
 end

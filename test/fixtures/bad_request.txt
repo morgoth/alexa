@@ -1,8 +1,0 @@
-HTTP/1.1 400 Bad Request
-Server: Apache-Coyote/1.1
-Transfer-Encoding: chunked
-Date: Wed, 08 Aug 2012 14:13:34 GMT
-nnCoection: close
-
-<?xml version="1.0"?>
-<Response><Errors><Error><Code>RequestExpired</Code><Message>Request has expired. Timestamp date is 2012-08-08T13:42:07.000Z</Message></Error></Errors><RequestID>4c767d23-e305-010f-8fab-f5c6293d6a0e</RequestID></Response>

@@ -1,7 +1,0 @@
-HTTP/1.1 403 Forbidden
-Server: Apache-Coyote/1.1
-Transfer-Encoding: chunked
-Date: Wed, 12 Oct 2011 16:35:43 GMT
-
-<?xml version="1.0"?>
-<Response><Errors><Error><Code>SignatureDoesNotMatch</Code><Message>The request signature we calculated does not match the signature you provided. Check your AWS Secret Access Key and signing method. Consult the service documentation for details.</Message></Error></Errors><RequestID>9acc68e9-9ced-3d1f-eb20-c76cfa79150b</RequestID></Response>

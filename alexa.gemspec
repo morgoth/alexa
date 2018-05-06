@@ -1,20 +1,25 @@
 # -*- encoding: utf-8 -*-
-require File.expand_path("../lib/alexa/version", __FILE__)
+lib = File.expand_path("../lib", __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require "alexa/version"
 
 Gem::Specification.new do |gem|
+  gem.name          = "alexa"
+  gem.version       = Alexa::VERSION
   gem.authors       = ["Wojciech Wnętrzak"]
   gem.email         = ["w.wnetrzak@gmail.com"]
-  gem.description   = %q{Alexa Web Information Service library (AWIS)}
+
   gem.summary       = %q{Alexa Web Information Service library}
+  gem.description   = %q{Alexa Web Information Service library (AWIS)}
   gem.homepage      = "https://github.com/morgoth/alexa"
   gem.license       = "MIT"
 
-  gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
-  gem.files         = `git ls-files`.split("\n")
-  gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  gem.name          = "alexa"
+  gem.files         = `git ls-files -z`.split("\x0").reject do |f|
+    f.match(%r{^(test|spec|features)/})
+  end
+  gem.bindir        = "exe"
+  gem.executables   = gem.files.grep(%r{^exe/}) { |f| File.basename(f) }
   gem.require_paths = ["lib"]
-  gem.version       = Alexa::VERSION
 
   gem.required_ruby_version = ">= 1.9.3"
 
